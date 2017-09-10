@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <item
+        android:drawable="@color/blanco"/>
+
+<!-- Revisar el Manifest para la aprovacion de dibujo de vectores para android < API 21 -->
+
+    <item
+        android:drawable="@drawable/ic_splash"
+        android:top="128dp"
+        android:gravity="center_horizontal"
+        android:height="86dp"
+        android:width="86dp"/>
+
+
+</layer-list>

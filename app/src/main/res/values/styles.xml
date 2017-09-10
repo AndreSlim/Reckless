@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Estilo para el Spash activity-->
+    <style name="SinBarraDeAccion" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/fondo_splash</item>
+    </style>
+
 </resources>
