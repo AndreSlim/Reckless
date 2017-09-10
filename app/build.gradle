@@ -28,4 +28,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+
+    // Dependencia agregada 2/2 (Buscar en el otro Gradle, la anterior)
+    compile 'com.github.Hitomis:CircleMenu:v1.0.2'
 }

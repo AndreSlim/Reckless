@@ -14,6 +14,8 @@ buildscript {
 
 allprojects {
     repositories {
+        // Dependencia agregada 1/2, (Buscar en el otro Gradle, la siguiente)
+        maven {url "https://jitpack.io"}
         jcenter()
     }
 }
