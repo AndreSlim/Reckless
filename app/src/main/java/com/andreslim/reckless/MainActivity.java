@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
                         switch (index){
 
-                            case 2:     // Alumno seleccionado
+                            case 2:     // Alumno seleccionado, Iniciar el QR
 
                                 Toast.makeText(MainActivity.this, "Alumno seleccionado", Toast.LENGTH_SHORT).show();
                         }
