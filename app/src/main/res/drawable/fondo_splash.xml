@@ -6,8 +6,6 @@
     <item
         android:drawable="@color/blanco"/>
 
-<!-- Revisar el Manifest para la aprovacion de dibujo de vectores para android < API 21 -->
-
     <item
         android:drawable="@drawable/ic_splash"
         android:top="128dp"
