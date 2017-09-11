@@ -13,7 +13,7 @@
         <!-- Activity para el splash-->
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/SinBarraDeAccion">
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,8 @@
         </activity>
 
         <!-- Actividad principal-->
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity"
+            android:theme="@style/SinBarraDeAccion"/>
     </application>
 
 </manifest>

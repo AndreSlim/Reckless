@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Reckless</string>
+
+    <string name="DescripcionInicio">\n¿Visitante, Alumno, Profesor?</string>
+
 </resources>
