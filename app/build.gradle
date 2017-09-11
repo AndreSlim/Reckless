@@ -29,6 +29,10 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
-    // Dependencia agregada 2/2 (Buscar en el otro Gradle, la anterior)
+    // Dependencia agregada 2/2 (Buscar en el otro Gradle, la anterior) Menú circular
     compile 'com.github.Hitomis:CircleMenu:v1.0.2'
+
+    // Dependencia para lector de QR
+    compile 'com.google.zxing:core:3.2.1'
+    compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
 }

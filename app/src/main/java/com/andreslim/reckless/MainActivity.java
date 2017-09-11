@@ -8,8 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
@@ -17,7 +17,7 @@ import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView fondo;
+    TextView fondo;     // Fondo de color para menú circular
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,17 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onMenuSelected(int index) {
+
+                        // - - - - - - - - - - - - < Alunmo seleccionado Starts > - - - - - - - - - - - - -
+
+                        switch (index){
+
+                            case 2:     // Alumno seleccionado
+
+                                Toast.makeText(MainActivity.this, "Alumno seleccionado", Toast.LENGTH_SHORT).show();
+                        }
+
+                        // - - - - - - - - - - - - < Alunmo seleccionado Ends > - - - - - - - - - - - - -
 
                     }
 
