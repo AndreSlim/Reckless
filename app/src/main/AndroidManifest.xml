@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- Activity para el splash-->
+        <!-- Activity para el splash -->
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashScreen">
@@ -21,9 +21,16 @@
             </intent-filter>
         </activity>
 
-        <!-- Actividad principal-->
-        <activity android:name=".MainActivity"
-            android:theme="@style/SinBarraDeAccion"/>
+        <!-- Actividad principal -->
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/SinBarraDeAccion" />
+
+        <!-- Actividad para el Scanner -->
+        <activity
+            android:name=".ScannerVertical"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AlumnoQR"></activity>
     </application>
 
 </manifest>

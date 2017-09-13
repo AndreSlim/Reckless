@@ -2,8 +2,11 @@ package com.andreslim.reckless;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.view.ViewAnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
@@ -25,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         fondo = (TextView) findViewById(R.id.fondo_menuCir);
+
+        final Activity actividad = this; // actividad para el QR
 
         // - - - - - - - - - - - - < MENÚ CIRCULAR STARTS > - - - - - - - - - - - - -
 
@@ -44,6 +50,20 @@ public class MainActivity extends AppCompatActivity {
                         switch (index){
 
                             case 2:     // Alumno seleccionado, Iniciar el QR
+
+                                // - - - - - - - - - - -- xxxxxxxxxxxxxxxxxx
+
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            Intent intent = new Intent(MainActivity.this,
+                                                                    AlumnoQR.class);
+                                                            startActivity(intent);
+                                                            finish();
+                                                        }
+                                }, 900);
+                                //  - - - - - - - - - - - xxxxxxxxxxxxxxxxxxx
 
                                 Toast.makeText(MainActivity.this, "Alumno seleccionado", Toast.LENGTH_SHORT).show();
                         }

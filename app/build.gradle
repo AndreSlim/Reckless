@@ -6,10 +6,10 @@ android {
     defaultConfig {
         //vectorDrawables.useSupportLibrary = true // Autoriza el dibujado de vectores (Corregido para android 4.4)
         applicationId "com.andreslim.reckless"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
-        versionName "0.1.0"
+        versionName "0.1.0 alpha"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -25,14 +25,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
 
     // Dependencia agregada 2/2 (Buscar en el otro Gradle, la anterior) Menú circular
-    compile 'com.github.Hitomis:CircleMenu:v1.0.2'
+    
 
     // Dependencia para lector de QR
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.github.Hitomis:CircleMenu:v1.0.2'
     compile 'com.google.zxing:core:3.2.1'
     compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    testCompile 'junit:junit:4.12'
 }
