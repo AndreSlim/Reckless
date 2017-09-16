@@ -1,6 +1,7 @@
 package com.andreslim.reckless;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,10 +9,10 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.widget.Button;
+import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,17 @@ import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 
 public class AlumnoQR extends AppCompatActivity {
+
+    // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
+
+    // Valores pedidos en la acterior actividad
+    public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
+    public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
+    View vistaPrincipal;    // Vista principal para la animación
+    private int revealX;
+    private int revealY;
+
+    // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
 
     CircleMenu menuCircularQR;
 
@@ -34,6 +46,36 @@ public class AlumnoQR extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alumno_qr);
+
+        // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
+
+        final Intent intent = getIntent();  // Intent para la revelación circular entre actividades
+        vistaPrincipal = findViewById(R.id.actividad_alumno_qr);    // Casteo layout de esta actividad para animación
+
+        if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
+                intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) &&
+                intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
+            vistaPrincipal.setVisibility(View.INVISIBLE);
+
+            revealX = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_X, 0);
+            revealY = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y, 0);
+
+
+            ViewTreeObserver viewTreeObserver = vistaPrincipal.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        revealActivity(revealX, revealY);
+                        vistaPrincipal.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+            }
+        } else {
+            vistaPrincipal.setVisibility(View.VISIBLE);
+        }
+
+        // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
 
         fondoNoQR = (TextView) findViewById(R.id.fondo_no_QR);
 
@@ -96,6 +138,7 @@ public class AlumnoQR extends AppCompatActivity {
 
                                                     // Haciendo la vista visible e iniciando la animación
                                                     fondoNoQR.setVisibility(View.VISIBLE);
+                                                    anim.setDuration(600);  // Velocidad de la animación al revelar
                                                     anim.start();
                                                 }else{
                                                     fondoNoQR.setVisibility(View.VISIBLE);  // Acción sin animación
@@ -113,7 +156,42 @@ public class AlumnoQR extends AppCompatActivity {
                         }).setOnMenuStatusChangeListener(new OnMenuStatusChangeListener() {
 
                     @Override
-                    public void onMenuOpened() {}
+                    public void onMenuOpened() {
+
+
+                        // - - - - - - - - - - - - < Efecto Revelar Starts > - - - - - - - - - - - - -
+
+                        if (Build.VERSION.SDK_INT >= 21) {
+
+                            // obteniendo el centro de el circulo
+                            int cx = (fondoNoQR.getLeft() + fondoNoQR.getRight()) / 2;
+                            int cy = (fondoNoQR.getTop() + fondoNoQR.getBottom()) / 2;
+
+                            // obteniendo el radio inicial de el circulo
+                            int initialRadius = fondoNoQR.getWidth();
+
+                            // creando la animación (el final del radio es cero)
+                            Animator anim =
+                                    ViewAnimationUtils.createCircularReveal(fondoNoQR, cx, cy, initialRadius, 0);
+
+                            // haciendo la vista invisible cuando la animación esta acabada
+                            anim.addListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    super.onAnimationEnd(animation);
+                                    fondoNoQR.setVisibility(View.INVISIBLE);
+                                }
+                            });
+
+                            // inicia la animación
+                            anim.start();
+                        } else {
+                            fondoNoQR.setVisibility(View.INVISIBLE);  // Acción sin animación
+                        }
+
+
+                        // - - - - - - - - - - - - < Efecto Revelar Ends > - - - - - - - - - - - - -
+                    }
 
                     @Override
                     public void onMenuClosed() {}
@@ -181,4 +259,48 @@ public class AlumnoQR extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+    // - - - - - - - - - - - - < Animación entre actividades STARTS METODOS> - - - - - - - - - - - - -
+
+    protected void revealActivity(int x, int y) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            float finalRadius = (float) (Math.max(vistaPrincipal.getWidth(), vistaPrincipal.getHeight()) * 1.1);
+
+            // create the animator for this view (the start radius is zero)
+            Animator circularReveal = ViewAnimationUtils.createCircularReveal(vistaPrincipal, x, y, 0, finalRadius);
+            circularReveal.setDuration(400);
+            circularReveal.setInterpolator(new AccelerateInterpolator());
+
+            // make the view visible and start the animation
+            vistaPrincipal.setVisibility(View.VISIBLE);
+            circularReveal.start();
+        } else {
+            finish();
+        }
+    }
+
+    protected void unRevealActivity() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            finish();
+        } else {
+            float finalRadius = (float) (Math.max(vistaPrincipal.getWidth(), vistaPrincipal.getHeight()) * 1.1);
+            Animator circularReveal = ViewAnimationUtils.createCircularReveal(
+                    vistaPrincipal, revealX, revealY, finalRadius, 0);
+
+            circularReveal.setDuration(400);
+            circularReveal.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    vistaPrincipal.setVisibility(View.INVISIBLE);
+                    finish();
+                }
+            });
+
+
+            circularReveal.start();
+        }
+    }
+
+    // - - - - - - - - - - - - < Animación entre actividades ENDS METODOS> - - - - - - - - - - - - -
+
 }

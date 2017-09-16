@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,20 +53,16 @@ public class MainActivity extends AppCompatActivity {
 
                             case 2:     // Alumno seleccionado, Iniciar el QR
 
-                                // - - - - - - - - - - -- xxxxxxxxxxxxxxxxxx
-
-                                Handler handler = new Handler();
+                                Handler handler = new Handler();    // Retardo para abrir el Intent
                                 handler.postDelayed(new Runnable() {
                                                         @Override
                                                         public void run() {
-                                                            Intent intent = new Intent(MainActivity.this,
-                                                                    AlumnoQR.class);
-                                                            startActivity(intent);
-                                                        }
-                                }, 666);
-                                //  - - - - - - - - - - - xxxxxxxxxxxxxxxxxxx
 
-                                Toast.makeText(MainActivity.this, "Alumno seleccionado", Toast.LENGTH_SHORT).show();
+                                                            View view = findViewById(R.id.actividad_principal);
+                                                            actividadPresente(view);
+
+                                                        }
+                                }, 620);    // Tiempo en milisegundos para iniciar la actividad
                         }
 
                         // - - - - - - - - - - - - < Alunmo seleccionado Ends > - - - - - - - - - - - - -
@@ -92,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Haciendo la vista visible e iniciando la animación
                     fondo.setVisibility(View.VISIBLE);
+                    anim.setDuration(500);  // Velocidad de la animación al revelar
                     anim.start();
                 }else{
                     fondo.setVisibility(View.VISIBLE);  // Acción sin animación
@@ -141,4 +140,24 @@ public class MainActivity extends AppCompatActivity {
 
         // - - - - - - - - - - - - < MENÚ CIRCULAR ENDS > - - - - - - - - - - - - -
     }
+
+    // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
+
+    public void actividadPresente(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, AlumnoQR.class);
+
+        intent.putExtra(AlumnoQR.EXTRA_CIRCULAR_REVEAL_X, revealX); // Valores tomados de la actividad a llegar
+        intent.putExtra(AlumnoQR.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+
+        // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
+
+    }
+
 }

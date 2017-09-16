@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <!-- Estilo para el Spash activity-->
@@ -13,9 +15,12 @@
         <item name="android:windowBackground">@drawable/fondo_splash</item>
     </style>
 
-    <!-- Estilo para el Spash activity-->
+    <!-- Estilo sin barra de acción y transición translucido -->
     <style name="SinBarraDeAccion" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/fondo_splash</item>
+
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
 </resources>
