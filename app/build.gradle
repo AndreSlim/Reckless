@@ -5,7 +5,7 @@ android {
     buildToolsVersion "26.0.1"
     defaultConfig {
         //vectorDrawables.useSupportLibrary = true // Autoriza el dibujado de vectores (Corregido para android 4.4)
-        applicationId "com.andreslim.reckless"
+        applicationId 'com.mus.tec'
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
@@ -18,17 +18,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     // Dependencia agregada 2/2 (Buscar en el otro Gradle, la anterior) Menú circular
-    
-
     // Dependencia para lector de QR
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
