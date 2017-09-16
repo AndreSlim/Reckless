@@ -26,11 +26,14 @@
             android:name=".MainActivity"
             android:theme="@style/SinBarraDeAccion" />
 
-        <!-- Actividad para el Scanner -->
+        <!-- Actividad mantener scanner vertical -->
         <activity
             android:name=".ScannerVertical"
             android:screenOrientation="portrait" />
-        <activity android:name=".AlumnoQR"></activity>
+
+        <!-- Actividad para preguntar QR -->
+        <activity android:name=".AlumnoQR"
+            android:theme="@style/SinBarraDeAccion"></activity>
     </application>
 
 </manifest>

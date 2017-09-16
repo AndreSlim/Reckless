@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         // - - - - - - - - - - - - < MENÚ CIRCULAR STARTS > - - - - - - - - - - - - -
 
-        CircleMenu menuCircular = (CircleMenu) findViewById(R.id.menuCir);
+        CircleMenu menuCircular = (CircleMenu) findViewById(R.id.menuCir_inicio);
 
         menuCircular.setMainMenu(Color.parseColor("#f44336"), R.drawable.ic_nuevo_mas, R.drawable.ic_nuevo_cancelar)
                 .addSubMenu(Color.parseColor("#4CAF50"), R.drawable.ic_visitante)
@@ -60,9 +60,8 @@ public class MainActivity extends AppCompatActivity {
                                                             Intent intent = new Intent(MainActivity.this,
                                                                     AlumnoQR.class);
                                                             startActivity(intent);
-                                                            finish();
                                                         }
-                                }, 900);
+                                }, 666);
                                 //  - - - - - - - - - - - xxxxxxxxxxxxxxxxxxx
 
                                 Toast.makeText(MainActivity.this, "Alumno seleccionado", Toast.LENGTH_SHORT).show();

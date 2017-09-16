@@ -11,7 +11,7 @@
         android:id="@+id/fondo_menuCir"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/DescripcionInicio"
+        android:text="@string/PreguntaInicio"
         android:textAlignment="center"
         android:textColor="@color/gris"
         android:textSize="24dp"
@@ -20,7 +20,7 @@
         android:visibility="invisible"/>
 
         <com.hitomi.cmlibrary.CircleMenu
-        android:id="@+id/menuCir"
+        android:id="@+id/menuCir_inicio"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

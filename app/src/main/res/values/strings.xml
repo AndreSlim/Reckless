@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Reckless</string>
 
-    <string name="DescripcionInicio">\n¿Visitante, Alumno, Profesor?</string>
+    <string name="PreguntaInicio">\n¿Visitante, Alumno, Profesor?</string>
+    <string name="preguntaQR">\n¿Cuentas con un QR?</string>
+    <string name="DescripcionDesarrollo">\nEsta es una versión en desarrollo, los codigos QR serán generados personalmente.</string>
 
 </resources>

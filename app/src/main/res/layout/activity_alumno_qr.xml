@@ -6,13 +6,33 @@
     android:layout_height="match_parent"
     tools:context="com.andreslim.reckless.AlumnoQR">
 
+    <TextView
+        android:id="@+id/fondo_menuCir"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/preguntaQR"
+        android:textAlignment="center"
+        android:textColor="@color/blanco"
+        android:textSize="24dp"
+        android:background="@color/azul"
+        android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/boton_leerQR"
-        android:text="Abrir el QR"/>
+    <TextView
+        android:id="@+id/fondo_no_QR"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/DescripcionDesarrollo"
+        android:textAlignment="center"
+        android:textColor="@color/blanco"
+        android:textSize="24dp"
+        android:background="@color/rojo_ACCENT"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
 
-
+    <com.hitomi.cmlibrary.CircleMenu
+        android:id="@+id/menuCir_QR"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </RelativeLayout>
