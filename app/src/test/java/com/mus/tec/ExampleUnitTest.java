@@ -1,4 +1,4 @@
-package com.andreslim.reckless;
+package com.mus.tec;
 
 import org.junit.Test;
 

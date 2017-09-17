@@ -1,4 +1,4 @@
-package com.andreslim.reckless;
+package com.mus.tec;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -33,7 +33,7 @@ public class AlumnoQR extends AppCompatActivity {
     private int revealX;
     private int revealY;
 
-    // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
+    // - - - - - - - - - - - - < Animación entre actividades ENDS > - - - - - - - - - - - - -
 
     CircleMenu menuCircularQR;
 
@@ -75,7 +75,7 @@ public class AlumnoQR extends AppCompatActivity {
             vistaPrincipal.setVisibility(View.VISIBLE);
         }
 
-        // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
+        // - - - - - - - - - - - - < Animación entre actividades ENDS > - - - - - - - - - - - - -
 
         fondoNoQR = (TextView) findViewById(R.id.fondo_no_QR);
 
@@ -266,12 +266,12 @@ public class AlumnoQR extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             float finalRadius = (float) (Math.max(vistaPrincipal.getWidth(), vistaPrincipal.getHeight()) * 1.1);
 
-            // create the animator for this view (the start radius is zero)
+            // Crear la animación desde esta vista
             Animator circularReveal = ViewAnimationUtils.createCircularReveal(vistaPrincipal, x, y, 0, finalRadius);
             circularReveal.setDuration(400);
             circularReveal.setInterpolator(new AccelerateInterpolator());
 
-            // make the view visible and start the animation
+            // Hacer visible la animacion
             vistaPrincipal.setVisibility(View.VISIBLE);
             circularReveal.start();
         } else {

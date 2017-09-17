@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "74522551526",
+    "firebase_url": "https://musapp-7d55e.firebaseio.com",
+    "project_id": "musapp-7d55e",
+    "storage_bucket": "musapp-7d55e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74522551526:android:f6c3fde4e1623aad",
+        "android_client_info": {
+          "package_name": "com.mus.tec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74522551526-9n373bdldprdlqo6uqpc5n7erf6qduuq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mus.tec",
+            "certificate_hash": "dffcb5715bb0cd282662b7b6c4445b8fa7d15445"
+          }
+        },
+        {
+          "client_id": "74522551526-2bdrcg78fj2ulldrksnvi314b1t9ctjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVwBxJNSZkQUch3dWlvbIHAq_hse7tpy8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74522551526-2bdrcg78fj2ulldrksnvi314b1t9ctjm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

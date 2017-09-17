@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.andreslim.reckless.AlumnoQR">
+    tools:context="com.mus.tec.AlumnoQR">
 
     <TextView
         android:id="@+id/fondo_menuCir"
@@ -23,7 +23,7 @@
         android:id="@+id/fondo_no_QR"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/DescripcionDesarrollo"
+        android:text="@string/descripcionDesarrollo"
         android:textAlignment="center"
         android:textColor="@color/blanco"
         android:textSize="24dp"

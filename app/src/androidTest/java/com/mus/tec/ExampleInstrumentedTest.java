@@ -1,4 +1,4 @@
-package com.andreslim.reckless;
+package com.mus.tec;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.andreslim.reckless", appContext.getPackageName());
+        assertEquals("com.mus.tec", appContext.getPackageName());
     }
 }

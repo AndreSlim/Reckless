@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/negro"
     android:id="@+id/actividad_principal"
-    tools:context="com.andreslim.reckless.MainActivity">
+    tools:context="com.mus.tec.MainActivity">
 
     <TextView
         android:id="@+id/fondo_menuCir"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/MensajeInicio"
+        android:text="@string/mensajeInicio"
         android:textAlignment="center"
         android:textColor="@color/gris"
         android:textSize="24dp"

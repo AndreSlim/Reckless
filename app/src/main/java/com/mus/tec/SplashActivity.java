@@ -1,4 +1,4 @@
-package com.andreslim.reckless;
+package com.mus.tec;
 
 import android.content.Intent;
 import android.os.Bundle;

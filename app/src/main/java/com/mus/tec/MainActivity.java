@@ -1,4 +1,4 @@
-package com.andreslim.reckless;
+package com.mus.tec;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -14,9 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
@@ -51,15 +49,30 @@ public class MainActivity extends AppCompatActivity {
 
                         switch (index){
 
+                            case 1:     // Profesor seleccionado
+
+                                Handler handlerP = new Handler();    // Retardo para abrir el Intent
+                                handlerP.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        View view = findViewById(R.id.actividad_principal);
+                                        actividadPresenteToProfesor(view);
+
+                                    }
+                                }, 620);    // Tiempo en milisegundos para iniciar la actividad
+
+                                break;
+
                             case 2:     // Alumno seleccionado, Iniciar el QR
 
-                                Handler handler = new Handler();    // Retardo para abrir el Intent
-                                handler.postDelayed(new Runnable() {
+                                Handler handlerA = new Handler();    // Retardo para abrir el Intent
+                                handlerA.postDelayed(new Runnable() {
                                                         @Override
                                                         public void run() {
 
-                                                            View view = findViewById(R.id.actividad_principal);
-                                                            actividadPresente(view);
+                                        View view = findViewById(R.id.actividad_principal);
+                                        actividadPresenteToAlumno(view);
 
                                                         }
                                 }, 620);    // Tiempo en milisegundos para iniciar la actividad
@@ -143,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
     // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
 
-    public void actividadPresente(View view) {
+    public void actividadPresenteToAlumno(View view) {
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(this, view, "transition");
         int revealX = (int) (view.getX() + view.getWidth() / 2);
@@ -156,8 +169,25 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityCompat.startActivity(this, intent, options.toBundle());
 
-        // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
+    }
+    // - - - - - - - - - - - - < Animación entre actividades ENDS > - - - - - - - - - - - - -
+
+    // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
+
+    public void actividadPresenteToProfesor(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, ProfesorLogIn.class);
+
+        intent.putExtra(AlumnoQR.EXTRA_CIRCULAR_REVEAL_X, revealX); // Valores tomados de la actividad a llegar
+        intent.putExtra(AlumnoQR.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
 
     }
+    // - - - - - - - - - - - - < Animación entre actividades ENDS > - - - - - - - - - - - - -
 
 }

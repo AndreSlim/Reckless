@@ -1,8 +1,18 @@
 <resources>
     <string name="app_name">MUS</string>
 
-    <string name="MensajeInicio">\n¿Visitante, Alumno, Profesor?</string>
+    <!-- Inicio -->
+    <string name="mensajeInicio">\n¿Visitante, Alumno, Profesor?</string>
+
+    <!-- Alumno QR -->
     <string name="preguntaQR">\n¿Cuentas con un QR?</string>
-    <string name="DescripcionDesarrollo">\nEsta es una versión en desarrollo, los codigos QR serán generados personalmente.</string>
+    <string name="descripcionDesarrollo">\nEsta es una versión en desarrollo, los codigos QR serán generados personalmente.</string>
+
+    <!-- Profesor LogIn -->
+    <string name="email">Correo Electrónico</string>
+    <string name="pass">Contraseña</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="campoVacio">No se puede dejar este campo vacío.</string>o
+    <string name="correoInvalido">Formato de correo invalido.</string>
 
 </resources>

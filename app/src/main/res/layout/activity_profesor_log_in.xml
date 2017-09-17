@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/actividad_profesor_LogIn"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/naranja_obscuro"
+    tools:context="com.mus.tec.ProfesorLogIn"
+
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/profesor_correo_mat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorTextAppearance="@style/aparencia_error"
+            >
+                <EditText
+                    android:id="@+id/profesor_correo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:textColor="@color/blanco"
+                    android:inputType="textEmailAddress"
+                    android:textSize="25dp"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/profesor_pass_mat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:errorTextAppearance="@style/aparencia_error"
+            app:passwordToggleEnabled="true">
+                <EditText
+                    android:id="@+id/profesor_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pass"
+                    android:textColor="@color/blanco"
+                    android:inputType="textPassword"
+                    android:textSize="25dp"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/boton_ingresar_profesor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@color/naranja_obscuro_ACCENT"
+            android:text="@string/ingresar"
+            android:textAllCaps="false"
+            android:textColor="@color/blanco"
+            android:textSize="20dp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

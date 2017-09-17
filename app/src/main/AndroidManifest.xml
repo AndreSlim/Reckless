@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.andreslim.reckless">
+    package="com.mus.tec">
 
     <application
         android:allowBackup="true"
@@ -10,30 +10,41 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
         <!-- Activity para el splash -->
         <activity
-            android:name=".SplashActivity"
+            android:name="com.mus.tec.SplashActivity"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+
         <!-- Actividad principal -->
         <activity
-            android:name=".MainActivity"
+            android:name="com.mus.tec.MainActivity"
             android:theme="@style/SinBarraDeAccion" />
+
 
         <!-- Actividad mantener scanner vertical -->
         <activity
-            android:name=".ScannerVertical"
+            android:name="com.mus.tec.ScannerVertical"
             android:screenOrientation="portrait" />
 
+
         <!-- Actividad para preguntar QR -->
-        <activity android:name=".AlumnoQR"
-            android:theme="@style/SinBarraDeAccion"></activity>
+        <activity
+            android:name="com.mus.tec.AlumnoQR"
+            android:theme="@style/SinBarraDeAccion" />
+
+
+        <!-- Actividad Inicio de Sesión profesor -->
+        <activity android:name="com.mus.tec.ProfesorLogIn"
+            android:theme="@style/SinBarraDeAccion"/>
+
+
     </application>
 
 </manifest>

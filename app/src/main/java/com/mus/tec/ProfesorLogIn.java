@@ -1,0 +1,174 @@
+package com.mus.tec;
+
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.content.Intent;
+import android.os.Build;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Patterns;
+import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateInterpolator;
+import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.regex.Pattern;
+
+public class ProfesorLogIn extends AppCompatActivity {
+
+
+    // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
+
+    // Valores pedidos en la acterior actividad
+    public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
+    public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
+    View vistaPrincipal;    // Vista principal para la animación
+    private int revealX;
+    private int revealY;
+
+    // - - - - - - - - - - - - < Animación entre actividades ENDS > - - - - - - - - - - - - -
+
+    private EditText correo, pass;
+    private TextInputLayout layoutCorreo, layoutPass;
+
+    private Button ingresar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profesor_log_in);
+
+
+        // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
+
+        final Intent intent = getIntent();  // Intent para la revelación circular entre actividades
+        vistaPrincipal = findViewById(R.id.actividad_profesor_LogIn);    // Casteo layout de esta actividad para animación
+
+        if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
+                intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) &&
+                intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
+            vistaPrincipal.setVisibility(View.INVISIBLE);
+
+            revealX = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_X, 0);
+            revealY = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y, 0);
+
+
+            ViewTreeObserver viewTreeObserver = vistaPrincipal.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        revealActivity(revealX, revealY);
+                        vistaPrincipal.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+            }
+        } else {
+            vistaPrincipal.setVisibility(View.VISIBLE);
+        }
+
+        // - - - - - - - - - - - - < Animación entre actividades ENDS > - - - - - - - - - - - - -
+
+        // - - - - - - - - - - - - < CAST STARTS > - - - - - - - - - - - - -
+
+        correo = (EditText) findViewById(R.id.profesor_correo);
+        pass = (EditText) findViewById(R.id.profesor_pass);
+
+        layoutCorreo = (TextInputLayout) findViewById(R.id.profesor_correo_mat);
+        layoutPass = (TextInputLayout) findViewById(R.id.profesor_pass_mat);
+
+        ingresar = (Button) findViewById(R.id.boton_ingresar_profesor);
+        // - - - - - - - - - - - - < CAST ENDS > - - - - - - - - - - - - -
+
+
+        // Boton para ingresar
+        ingresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                validar();
+
+            }
+        });
+
+    }
+
+    // - - - - - - - - - - - - < CVALIDAR CAMPOS STARTS > - - - - - - - - - - - - -
+    private void validar(){
+
+        boolean esValido = true;
+
+        // Validar Correo
+        if(correo.getText().toString().isEmpty()){
+            layoutCorreo.setError(getString(R.string.campoVacio));
+            esValido = false;
+        } else if (!validarEmail(correo.getText().toString())){
+            layoutCorreo.setError(getString(R.string.correoInvalido));
+            esValido = false;
+        } else {
+            layoutCorreo.setErrorEnabled(false);
+        }
+
+        // Validar pass
+        if(pass.getText().toString().isEmpty()){
+            layoutPass.setError(getString(R.string.campoVacio));
+            esValido = false;
+        } else {
+            layoutPass.setErrorEnabled(false);
+        }
+    }
+    // Validar correo electronico bien escrito
+    private boolean validarEmail(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
+    }
+
+    // - - - - - - - - - - - - < VALIDAR CAMPOS ENDS > - - - - - - - - - - - - -
+
+    // - - - - - - - - - - - - < Animación entre actividades STARTS METODOS> - - - - - - - - - - - - -
+
+    protected void revealActivity(int x, int y) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            float finalRadius = (float) (Math.max(vistaPrincipal.getWidth(), vistaPrincipal.getHeight()) * 1.1);
+
+            // Crear la animación desde esta vista
+            Animator circularReveal = ViewAnimationUtils.createCircularReveal(vistaPrincipal, x, y, 0, finalRadius);
+            circularReveal.setDuration(400);
+            circularReveal.setInterpolator(new AccelerateInterpolator());
+
+            // Hacer visible la animacion
+            vistaPrincipal.setVisibility(View.VISIBLE);
+            circularReveal.start();
+        } else {
+            finish();
+        }
+    }
+
+    protected void unRevealActivity() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            finish();
+        } else {
+            float finalRadius = (float) (Math.max(vistaPrincipal.getWidth(), vistaPrincipal.getHeight()) * 1.1);
+            Animator circularReveal = ViewAnimationUtils.createCircularReveal(
+                    vistaPrincipal, revealX, revealY, finalRadius, 0);
+
+            circularReveal.setDuration(400);
+            circularReveal.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    vistaPrincipal.setVisibility(View.INVISIBLE);
+                    finish();
+                }
+            });
+
+
+            circularReveal.start();
+        }
+    }
+
+    // - - - - - - - - - - - - < Animación entre actividades ENDS METODOS> - - - - - - - - - - - - -
+
+}
