@@ -7,14 +7,19 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
@@ -23,12 +28,36 @@ public class MainActivity extends AppCompatActivity {
 
     TextView fondo;     // Fondo de color para menú circular
 
+    // Listener para Firebase
+    FirebaseAuth.AuthStateListener escuchaInicioSesionProfesor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         fondo = (TextView) findViewById(R.id.fondo_menuCir);
+
+        // - - - - - - - - - - - - < Inicio Sesión Firebase STARTS > - - - - - - - - - - - - -
+        escuchaInicioSesionProfesor = new FirebaseAuth.AuthStateListener(){
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth cuentaFirebase) {
+                FirebaseUser user = cuentaFirebase.getCurrentUser();
+
+                if (user != null){
+
+                    // Aqui va la actividad!! <---- # # # # # # # # # # # # # # # # #
+                    Log.i("Estado Inicio Sesión","Sesión Iniciada con el correo "+user.getEmail());
+
+                    Toast.makeText(MainActivity.this, "Inicio de Sesión correcto con "+user.getEmail(), Toast.LENGTH_SHORT).show();
+
+                } else{
+                    Log.i("Estado Inicio Sesión","Sesión Cerrada");
+                }
+
+            }
+        };
+        // - - - - - - - - - - - - < Inicio Sesión Firebase ENDS> - - - - - - - - - - - - -
 
         final Activity actividad = this; // actividad para el QR
 
@@ -189,5 +218,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
     // - - - - - - - - - - - - < Animación entre actividades ENDS > - - - - - - - - - - - - -
+
+    // - - - - - - - - - - - - < Escucha inicio de sesión Firebase STARTS > - - - - - - - - - - - - -
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseAuth.getInstance().addAuthStateListener(escuchaInicioSesionProfesor);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (escuchaInicioSesionProfesor != null){
+            FirebaseAuth.getInstance().removeAuthStateListener(escuchaInicioSesionProfesor);
+        }
+
+    }
+
+    // - - - - - - - - - - - - < Escucha inicio de sesión FIrebase ENDS > - - - - - - - - - - - - -
 
 }

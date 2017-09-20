@@ -4,9 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -14,15 +16,21 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
-public class ProfesorLogIn extends AppCompatActivity {
+public class ProfesorLogIn extends AppCompatActivity{
 
 
     // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
 
-    // Valores pedidos en la acterior actividad
+    // Valores pedidos en la anterior actividad
     public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
     public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
     View vistaPrincipal;    // Vista principal para la animación
@@ -31,7 +39,7 @@ public class ProfesorLogIn extends AppCompatActivity {
 
     // - - - - - - - - - - - - < Animación entre actividades ENDS > - - - - - - - - - - - - -
 
-    private EditText correo, pass;
+    private EditText correo, contra;
     private TextInputLayout layoutCorreo, layoutPass;
 
     private Button ingresar;
@@ -75,7 +83,7 @@ public class ProfesorLogIn extends AppCompatActivity {
         // - - - - - - - - - - - - < CAST STARTS > - - - - - - - - - - - - -
 
         correo = (EditText) findViewById(R.id.profesor_correo);
-        pass = (EditText) findViewById(R.id.profesor_pass);
+        contra = (EditText) findViewById(R.id.profesor_pass);
 
         layoutCorreo = (TextInputLayout) findViewById(R.id.profesor_correo_mat);
         layoutPass = (TextInputLayout) findViewById(R.id.profesor_pass_mat);
@@ -84,19 +92,26 @@ public class ProfesorLogIn extends AppCompatActivity {
         // - - - - - - - - - - - - < CAST ENDS > - - - - - - - - - - - - -
 
 
-        // Boton para ingresar
+        // Boton para ingresar pulsado - - - - - - - - - - - - - - - - - - - - - - - -
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 validar();
 
+                String email = correo.getText().toString();
+                String pass = contra.getText().toString();
+
+                IniciarSesion(email, pass);
+
+                Log.i("Estado Inicio Sesión","Solicitado el inicio de Sesión");
+
             }
         });
 
     }
 
-    // - - - - - - - - - - - - < CVALIDAR CAMPOS STARTS > - - - - - - - - - - - - -
+    // - - - - - - - - - - - - < VALIDAR CAMPOS STARTS > - - - - - - - - - - - - -
     private void validar(){
 
         boolean esValido = true;
@@ -113,7 +128,7 @@ public class ProfesorLogIn extends AppCompatActivity {
         }
 
         // Validar pass
-        if(pass.getText().toString().isEmpty()){
+        if(contra.getText().toString().isEmpty()){
             layoutPass.setError(getString(R.string.campoVacio));
             esValido = false;
         } else {
@@ -170,5 +185,32 @@ public class ProfesorLogIn extends AppCompatActivity {
     }
 
     // - - - - - - - - - - - - < Animación entre actividades ENDS METODOS> - - - - - - - - - - - - -
+
+    // - - - - - - - - - - - - < Iniciar Sesion STARTS> - - - - - - - - - - - - -
+
+    private void IniciarSesion(String email, String pass){
+
+        // Inicio de Sesión y comprobación
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+            // Comprobacion del Inicio de Sesión
+
+                if(task.isSuccessful()){
+
+                    Log.i("Estado Inicio Sesión","Inicio de sesión correcto");
+
+                } else{
+
+                    Log.e("Estado Inicio Sesión","Error: "+task.getException().getLocalizedMessage());
+
+                }
+
+            }
+        });
+
+    }
+    // - - - - - - - - - - - - < Iniciar Sesion ENDS> - - - - - - - - - - - - -
 
 }
