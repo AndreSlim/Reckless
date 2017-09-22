@@ -47,9 +47,14 @@ public class MainActivity extends AppCompatActivity {
                 if (user != null){
 
                     // Aqui va la actividad!! <---- # # # # # # # # # # # # # # # # #
+
+                    Intent profesor = new Intent(MainActivity.this, MainActivityProfesor.class);
+                    startActivity(profesor);
+                    finish();
+
                     Log.i("Estado Inicio Sesión","Sesión Iniciada con el correo "+user.getEmail());
 
-                    Toast.makeText(MainActivity.this, "Inicio de Sesión correcto con "+user.getEmail(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Inicio de Sesión correcto con "+user.getEmail(), Toast.LENGTH_LONG).show();
 
                 } else{
                     Log.i("Estado Inicio Sesión","Sesión Cerrada");

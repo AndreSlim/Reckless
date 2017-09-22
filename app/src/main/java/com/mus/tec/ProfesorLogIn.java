@@ -42,7 +42,7 @@ public class ProfesorLogIn extends AppCompatActivity{
     private EditText correo, contra;
     private TextInputLayout layoutCorreo, layoutPass;
 
-    private Button ingresar;
+    Button ingresar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,9 +102,15 @@ public class ProfesorLogIn extends AppCompatActivity{
                 String email = correo.getText().toString();
                 String pass = contra.getText().toString();
 
-                IniciarSesion(email, pass);
+                // Comprobando que no esten vacios ambos campos
+                // if acortado preguntando que no sea null
+                if(!email.isEmpty() && !pass.isEmpty()) {
 
-                Log.i("Estado Inicio Sesión","Solicitado el inicio de Sesión");
+                    IniciarSesion(email, pass);
+
+                    Log.i("Estado Inicio Sesión", "Solicitado el inicio de Sesión");
+                    Toast.makeText(ProfesorLogIn.this, "Iniciando Sesión...", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -201,7 +207,21 @@ public class ProfesorLogIn extends AppCompatActivity{
 
                     Log.i("Estado Inicio Sesión","Inicio de sesión correcto");
 
-                } else{
+                    // Intent corto para iniciar la Activity del profesor
+                    startActivity(new Intent(getApplicationContext(), MainActivityProfesor.class));
+                    finish();
+
+                } else{ // Manejo de excepciones - - - - - - - - - - - - - - - - - - -
+
+                    if(task.getException().getLocalizedMessage().toString().equals("The password is invalid or the user does not have a password.")){
+
+                        Toast.makeText(ProfesorLogIn.this, "La contraseña es invalida", Toast.LENGTH_LONG).show();
+
+                    }else if(task.getException().getLocalizedMessage().toString().equals("There is no user record corresponding to this identifier. The user may have been deleted.")){
+
+                        Toast.makeText(ProfesorLogIn.this, "El correo electronico no existe o fue eliminado", Toast.LENGTH_SHORT).show();
+
+                    }
 
                     Log.e("Estado Inicio Sesión","Error: "+task.getException().getLocalizedMessage());
 

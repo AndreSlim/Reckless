@@ -10,41 +10,40 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
         <!-- Activity para el splash -->
         <activity
-            android:name="com.mus.tec.SplashActivity"
+            android:name=".SplashActivity"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-
         <!-- Actividad principal -->
         <activity
-            android:name="com.mus.tec.MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/SinBarraDeAccion" />
-
 
         <!-- Actividad mantener scanner vertical -->
         <activity
-            android:name="com.mus.tec.ScannerVertical"
+            android:name=".ScannerVertical"
             android:screenOrientation="portrait" />
-
 
         <!-- Actividad para preguntar QR -->
         <activity
-            android:name="com.mus.tec.AlumnoQR"
+            android:name=".AlumnoQR"
             android:theme="@style/SinBarraDeAccion" />
 
-
         <!-- Actividad Inicio de Sesión profesor -->
-        <activity android:name="com.mus.tec.ProfesorLogIn"
-            android:theme="@style/SinBarraDeAccion"/>
+        <activity
+            android:name=".ProfesorLogIn"
+            android:theme="@style/SinBarraDeAccion" />
 
-
+        <!-- Actividad Principal Profesor -->
+        <activity android:name=".MainActivityProfesor"
+            android:theme="@style/SinBarraDeAccion"></activity>
     </application>
 
 </manifest>
