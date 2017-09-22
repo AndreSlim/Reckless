@@ -221,6 +221,10 @@ public class ProfesorLogIn extends AppCompatActivity{
 
                         Toast.makeText(ProfesorLogIn.this, "El correo electronico no existe o fue eliminado", Toast.LENGTH_SHORT).show();
 
+                    }else if(task.getException().getLocalizedMessage().toString().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.")) {
+
+                        Toast.makeText(ProfesorLogIn.this, "Ha ocurrido un error de red o del servidor", Toast.LENGTH_SHORT).show();
+
                     }
 
                     Log.e("Estado Inicio Sesión","Error: "+task.getException().getLocalizedMessage());
