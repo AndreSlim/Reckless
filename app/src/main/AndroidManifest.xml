@@ -42,8 +42,27 @@
             android:theme="@style/SinBarraDeAccion" />
 
         <!-- Actividad Principal Profesor -->
-        <activity android:name=".MainActivityProfesor"
-            android:theme="@style/SinBarraDeAccion"></activity>
+        <activity
+            android:name=".MainActivityProfesor"
+            android:theme="@style/SinBarraDeAccion" />
+
+        <!-- Servicio de mensajes Firebase -->
+        <service android:name=".ServicioDeMensajesFirebase">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!-- Servicio token de mensajes Firebase -->
+        <service android:name=".ServicioIDInstanciaFirebase">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- Actividad Ver Notificación -->
+        <activity android:name=".VerNotificacion"
+            android:theme="@style/SinBarraDeAccion"/>
+
     </application>
 
 </manifest>

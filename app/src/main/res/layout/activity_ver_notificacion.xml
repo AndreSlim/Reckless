@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/blanco"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mus.tec.VerNotificacion">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/texto_noti_titulo"
+        android:textAlignment="center"
+        android:text="@string/app_name"
+        android:textColor="@color/gris"
+        android:textSize="48sp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/texto_noti_titulo"
+        android:text="@string/app_name"
+        android:textColor="@color/gris"
+        android:id="@+id/texto_noti_cuerpo"
+        android:textSize="26sp" />
+
+</RelativeLayout>
