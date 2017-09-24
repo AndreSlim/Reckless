@@ -33,4 +33,14 @@
         android:layout_centerHorizontal="true"
         android:text="Cerrar sesión" />
 
+    <Button
+        android:id="@+id/beta_boton_enviar_notificación"
+        android:text="Enviar Notificación"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/boton_cerrar_sesion"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="53dp" />
+
+
 </RelativeLayout>

@@ -20,43 +20,39 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class ServicioDeMensajesFirebase extends FirebaseMessagingService {
 
-
-    @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
-        super.onMessageReceived(remoteMessage);
-
-        // Acceder al contenido de la notificación
-        if(remoteMessage.getNotification() != null){    // Comprobar contenido no nulo
-
-            MostrarNotificacion(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
-
-            Log.i("Firebase", "El mensaje es: " + remoteMessage.getNotification().getBody());
-        }
-
+    public ServicioDeMensajesFirebase() {
     }
 
-    private void MostrarNotificacion(String titulo, String cuerpo) {
+    @Override
+    public void onMessageReceived(RemoteMessage remoteMessage)
+    {
+        if(remoteMessage == null)
+        {
+            return;
+        }
+        if(remoteMessage.getNotification() != null)
+        {
+            handleNotification(remoteMessage.getNotification().getTitle());
+        }
+    }
+    public void handleNotification(String message)
+    {
+        sendNotification(message);
+    }
 
-        // Haciendo Intent para abrir despues de mostrar la notificación
+    public void sendNotification(String message)
+    {
         Intent intent = new Intent(this, VerNotificacion.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-
-        // Sonido para mostrar la notificación
-        Uri sonidoNotif = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
-        // Creando la notificación
-        NotificationCompat.Builder generarNotificacion = new NotificationCompat.Builder(this).
-                setSmallIcon(R.drawable.ic_qr).
-                setContentTitle(titulo).
-                setContentText(cuerpo).
-                setAutoCancel(true).
-                setSound(sonidoNotif).
-                setContentIntent(pendingIntent);
-
-        // Administrador de notificaciones
-        NotificationManager adminNotificaciones = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        adminNotificaciones.notify(0, generarNotificacion.build());
-
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_qr)
+                //.setContentTitle(“Title”)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0, notificationBuilder.build());
     }
 }
