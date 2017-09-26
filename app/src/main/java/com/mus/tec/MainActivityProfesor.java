@@ -32,7 +32,7 @@ public class MainActivityProfesor extends AppCompatActivity {
         cerrarSesion = (Button) findViewById(R.id.boton_cerrar_sesion);
 
         // BETA XXXX
-        enviarNoti = (Button) findViewById(R.id.beta_boton_enviar_notificación);
+        enviarNoti = (Button) findViewById(R.id.boton_enviar_notificacion);
 
         // creando variable user para tener información del Inicio de Sesión
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -58,7 +58,7 @@ public class MainActivityProfesor extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivityProfesor.this, "Enviando notificación", Toast.LENGTH_SHORT).show();
-                String topic = "update";
+                String topic = "todos";
                 String mensaje = "Mensaje chido";
                 String TAG = "TAG chido";
                 enviarNotificacion(topic, mensaje, TAG);

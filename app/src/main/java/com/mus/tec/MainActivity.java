@@ -3,13 +3,16 @@ package com.mus.tec;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +41,85 @@ public class MainActivity extends AppCompatActivity {
 
         fondo = (TextView) findViewById(R.id.fondo_menuCir);
 
+        final CircleMenu menuCircular = (CircleMenu) findViewById(R.id.menuCir_inicio);
+
+        // - - - - - - - - - - - - < Snackbar STARTS > - - - - - - - - - - - - -
+        View viewSnackbar = findViewById(R.id.actividad_principal);
+        final Snackbar snackbar = Snackbar
+                .make(viewSnackbar, R.string.snackbarInicio, Snackbar.LENGTH_INDEFINITE)
+                .setActionTextColor(getResources().getColor(R.color.amarillo))
+                .setAction(R.string.snackbarInicioAccion, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {    // acción a realizar despues de seleccionar
+                        menuCircular.closeMenu();   // Oculta el menú circular
+
+
+                        // Cuadro de Dialogo principal
+                        final AlertDialog.Builder creador = new AlertDialog.Builder(MainActivity.this);
+                        creador.setTitle(R.string.tituloAyuda)
+                                .setMessage(R.string.mensajeAyuda)
+                                .setCancelable(false)
+                                .setNeutralButton(R.string.ayudaSig,
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+
+                                                // Dialogo Visitante
+                                                creador.setTitle(R.string.tituloAyudaV)
+                                                        .setMessage(R.string.mensajeAyudaV)
+                                                        .setIcon(R.drawable.ic_visitante)
+                                                        .setCancelable(false)
+                                                        .setNeutralButton(R.string.ayudaSig,
+                                                                new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                                        // Dialogo Alumno
+                                                                        creador.setTitle(R.string.tituloAyudaA)
+                                                                                .setMessage(R.string.mensajeAyudaA)
+                                                                                .setIcon(R.drawable.ic_alumno)
+                                                                                .setCancelable(false)
+                                                                                .setNeutralButton(R.string.ayudaSig,
+                                                                                        new DialogInterface.OnClickListener() {
+                                                                                            @Override
+                                                                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                                                                //Dialogo Profesor
+                                                                                                creador.setTitle(R.string.tituloAyudaP)
+                                                                                                        .setMessage(R.string.mensajeAyudaP)
+                                                                                                        .setIcon(R.drawable.ic_profesor)
+                                                                                                        .setCancelable(false)
+                                                                                                        .setNeutralButton(R.string.ayudaFin,
+                                                                                                                new DialogInterface.OnClickListener() {
+                                                                                                                    @Override
+                                                                                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                                                                                        menuCircular.openMenu();
+                                                                                                                    }
+                                                                                                                });
+                                                                                                //Mostrar Dialogo Profesor
+                                                                                                AlertDialog mensaje = creador.create();
+                                                                                                mensaje.show();
+                                                                                            }
+                                                                                        });
+                                                                        //Mostrar Dialogo Alumno
+                                                                        AlertDialog mensaje = creador.create();
+                                                                        mensaje.show();
+
+                                                                    }
+                                                                });
+
+                                                //Mostrar Dialogo Visitante
+                                                AlertDialog mensaje = creador.create();
+                                                mensaje.show();
+                                            }
+                                        });
+                        // Mostrar primer Dialogo
+                        AlertDialog mensaje = creador.create();
+                        mensaje.show();
+
+                    }
+                });
+        // - - - - - - - - - - - - < Snackbar ENDS > - - - - - - - - - - - - -
+
         // - - - - - - - - - - - - < Inicio Sesión Firebase STARTS > - - - - - - - - - - - - -
         escuchaInicioSesionProfesor = new FirebaseAuth.AuthStateListener(){
             @Override
@@ -54,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.i("Estado Inicio Sesión","Sesión Iniciada con el correo "+user.getEmail());
 
-                    Toast.makeText(MainActivity.this, "Inicio de Sesión correcto con "+user.getEmail(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Inicio de Sesión correcto con " + user.getEmail() + "\n\nApp Beta", Toast.LENGTH_LONG).show();
 
                 } else{
                     Log.i("Estado Inicio Sesión","Sesión Cerrada");
@@ -68,22 +150,19 @@ public class MainActivity extends AppCompatActivity {
 
         // - - - - - - - - - - - - < MENÚ CIRCULAR STARTS > - - - - - - - - - - - - -
 
-        CircleMenu menuCircular = (CircleMenu) findViewById(R.id.menuCir_inicio);
-
         menuCircular.setMainMenu(Color.parseColor("#f44336"), R.drawable.ic_nuevo_mas, R.drawable.ic_nuevo_cancelar)
                 .addSubMenu(Color.parseColor("#4CAF50"), R.drawable.ic_visitante)
                 .addSubMenu(Color.parseColor("#FF5722"), R.drawable.ic_profesor)
-                .addSubMenu(Color.parseColor("#2196F3"), R.drawable.ic_estudiante)
+                .addSubMenu(Color.parseColor("#2196F3"), R.drawable.ic_alumno)
                 .setOnMenuSelectedListener(new OnMenuSelectedListener() {
 
                     @Override
                     public void onMenuSelected(int index) {
 
-                        // - - - - - - - - - - - - < Alunmo seleccionado Starts > - - - - - - - - - - - - -
-
                         switch (index){
 
                             case 1:     // Profesor seleccionado
+                            // - - - - - - - - - - - - < Profesor seleccionado Starts > - - - - - - - - - - - - -
 
                                 Handler handlerP = new Handler();    // Retardo para abrir el Intent
                                 handlerP.postDelayed(new Runnable() {
@@ -94,11 +173,13 @@ public class MainActivity extends AppCompatActivity {
                                         actividadPresenteToProfesor(view);
 
                                     }
-                                }, 620);    // Tiempo en milisegundos para iniciar la actividad
+                                }, 400);    // Tiempo en milisegundos para iniciar la actividad
 
                                 break;
+                            // - - - - - - - - - - - - < Profesor seleccionado Ends > - - - - - - - - - - - - -
 
                             case 2:     // Alumno seleccionado, Iniciar el QR
+                            // - - - - - - - - - - - - < Alumno seleccionado Starts > - - - - - - - - - - - - -
 
                                 Handler handlerA = new Handler();    // Retardo para abrir el Intent
                                 handlerA.postDelayed(new Runnable() {
@@ -109,10 +190,12 @@ public class MainActivity extends AppCompatActivity {
                                         actividadPresenteToAlumno(view);
 
                                                         }
-                                }, 620);    // Tiempo en milisegundos para iniciar la actividad
+                                }, 400);    // Tiempo en milisegundos para iniciar la actividad
+
+                                break;
                         }
 
-                        // - - - - - - - - - - - - < Alunmo seleccionado Ends > - - - - - - - - - - - - -
+                            // - - - - - - - - - - - - < Alumno seleccionado Ends > - - - - - - - - - - - - -
 
                     }
 
@@ -144,6 +227,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // - - - - - - - - - - - - < Efecto Revelar Ends > - - - - - - - - - - - - -
+
+                // Snackbar
+                snackbar.show();
 
             }
 
@@ -182,6 +268,10 @@ public class MainActivity extends AppCompatActivity {
 
 
                 // - - - - - - - - - - - - < Efecto Revelar Ends > - - - - - - - - - - - - -
+
+                // Snackbar
+                snackbar.dismiss();
+
             }
         });
 

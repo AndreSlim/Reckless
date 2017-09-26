@@ -14,8 +14,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Suscripción a la base de datos
-        FirebaseMessaging.getInstance().subscribeToTopic("updates");
-        Toast.makeText(this, "Suscrito", Toast.LENGTH_SHORT).show();
+        FirebaseMessaging.getInstance().subscribeToTopic("todos");
+        Toast.makeText(this, "Suscrito a los mensajes de Firebase", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

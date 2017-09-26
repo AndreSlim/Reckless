@@ -15,7 +15,7 @@
         android:text="@string/preguntaQR"
         android:textAlignment="center"
         android:textColor="@color/blanco"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:background="@color/azul"
         android:layout_centerHorizontal="true"/>
 
@@ -26,7 +26,7 @@
         android:text="@string/descripcionDesarrollo"
         android:textAlignment="center"
         android:textColor="@color/blanco"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:background="@color/rojo_ACCENT"
         android:layout_centerHorizontal="true"
         android:visibility="invisible"/>

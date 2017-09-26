@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -107,10 +108,10 @@ public class AlumnoQR extends AppCompatActivity {
                                                 integrador.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                                                 integrador.setCaptureActivity(ScannerVertical.class);
                                                 integrador.setOrientationLocked(true);
-                                                integrador.setPrompt("Orale prro escaneale!");
+                                                integrador.setPrompt(getResources().getString(R.string.promptSccanner));
                                                 integrador.initiateScan();
                                             }
-                                        }, 666);    // Tiempo que tardará en abrir en milisegundos
+                                        }, 500);    // Tiempo que tardará en abrir en milisegundos
 
                                         break;      // break caso 0
 
@@ -211,7 +212,8 @@ public class AlumnoQR extends AppCompatActivity {
         if (resultado != null){
             if (resultado.getContents() == null){
                 // Mensaje en caso de ser cancelada la lectura del QR
-                Toast.makeText(this, "Lectura cancelada", Toast.LENGTH_SHORT).show();
+                View viewSnackbar = findViewById(R.id.actividad_alumno_qr);
+                Snackbar.make(viewSnackbar, R.string.lecturaQRCancel, Snackbar.LENGTH_LONG).show();
             }else{
 
                 String idValido = resultado.getContents();

@@ -34,13 +34,14 @@
         android:text="Cerrar sesión" />
 
     <Button
-        android:id="@+id/beta_boton_enviar_notificación"
-        android:text="Enviar Notificación"
+        android:id="@+id/boton_enviar_notificacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/boton_cerrar_sesion"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp" />
+        android:layout_marginTop="53dp"
+        android:text="@string/enviarNoti"
+        android:textAllCaps="false" />
 
 
 </RelativeLayout>

@@ -15,7 +15,7 @@
         android:text="@string/mensajeInicio"
         android:textAlignment="center"
         android:textColor="@color/gris"
-        android:textSize="24dp"
+        android:textSize="40sp"
         android:background="@color/blanco"
         android:layout_centerHorizontal="true"
         android:visibility="invisible"/>
@@ -25,19 +25,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="alpha"
-        android:textSize="50dp"
-        android:textColor="@color/negro"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
-        android:textAlignment="center"
-        android:textStyle="italic"/>
-
-
 
 </RelativeLayout>

@@ -52,17 +52,17 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <!-- Servicio token de mensajes Firebase -->
-        <service android:name=".ServicioIDInstanciaFirebase">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
 
         <!-- Actividad Ver Notificación -->
-        <activity android:name=".VerNotificacion"
-            android:theme="@style/SinBarraDeAccion"/>
+        <activity
+            android:name=".VerNotificacion"
+            android:theme="@style/SinBarraDeAccion" />
 
+        <!-- Actividad Enviar Notificaciones -->
+        <activity
+            android:name=".EnviarNotificaciones"
+            android:theme="@style/SinBarraDeAccion" />
+        <activity android:name=".AcercaDeProfesor"></activity>
     </application>
 
 </manifest>
