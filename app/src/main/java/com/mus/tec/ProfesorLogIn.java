@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class ProfesorLogIn extends AppCompatActivity{
     private TextInputLayout layoutCorreo, layoutPass;
 
     Button ingresar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,7 +203,7 @@ public class ProfesorLogIn extends AppCompatActivity{
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-            // Comprobacion del Inicio de Sesión
+                // Comprobacion del Inicio de Sesión
 
                 if(task.isSuccessful()){
 
@@ -215,15 +217,15 @@ public class ProfesorLogIn extends AppCompatActivity{
 
                     if(task.getException().getLocalizedMessage().toString().equals("The password is invalid or the user does not have a password.")){
 
-                        Toast.makeText(ProfesorLogIn.this, "La contraseña es invalida", Toast.LENGTH_LONG).show();
+                        Snackbar.make(vistaPrincipal, R.string.passInvalido, Snackbar.LENGTH_LONG).show();
 
                     }else if(task.getException().getLocalizedMessage().toString().equals("There is no user record corresponding to this identifier. The user may have been deleted.")){
 
-                        Toast.makeText(ProfesorLogIn.this, "El correo electronico no existe o fue eliminado", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(vistaPrincipal, R.string.emailInvalido, Snackbar.LENGTH_LONG).show();
 
                     }else if(task.getException().getLocalizedMessage().toString().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.")) {
 
-                        Toast.makeText(ProfesorLogIn.this, "Ha ocurrido un error de red o del servidor", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(vistaPrincipal, R.string.sinRed, Snackbar.LENGTH_LONG).show();
 
                     }
 

@@ -34,8 +34,14 @@
     <string name="campoVacio">No se puede dejar este campo vacío.</string>
     <string name="correoInvalido">Formato de correo invalido.</string>
 
+    <string name="passInvalido">La contraseña es invalida</string>
+    <string name="emailInvalido">El correo electronico no existe o fue eliminado</string>
+    <string name="sinRed">Ha ocurrido un error de red o del servidor</string>
+
 
     <!-- Profesor Main -->
+    <string name="profesorNoDisponible">No disponible</string>
+    <string name="profesorDisponible">Disponible</string>
     <string name="enviarNoti">Enviar una Notificación</string>
 
 </resources>

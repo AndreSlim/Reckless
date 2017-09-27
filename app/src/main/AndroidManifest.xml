@@ -62,7 +62,11 @@
         <activity
             android:name=".EnviarNotificaciones"
             android:theme="@style/SinBarraDeAccion" />
+
+        <!-- Actividad Acerca de profesor -->
         <activity android:name=".AcercaDeProfesor"></activity>
+
+
     </application>
 
 </manifest>

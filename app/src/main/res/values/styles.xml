@@ -9,12 +9,12 @@
     </style>
 
     <!-- Estilo para el Spash activity-->
-    <style name="SplashScreen" parent="Theme.AppCompat.NoActionBar">
+    <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/fondo_splash</item>
     </style>
 
     <!-- Estilo sin barra de acción y transición translucido -->
-    <style name="SinBarraDeAccion" parent="Theme.AppCompat.NoActionBar">
+    <style name="SinBarraDeAccion" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
 
     <!-- Estilo para el error de un textview -->
