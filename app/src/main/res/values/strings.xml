@@ -43,5 +43,11 @@
     <string name="profesorNoDisponible">No disponible</string>
     <string name="profesorDisponible">Disponible</string>
     <string name="enviarNoti">Enviar una Notificación</string>
+    
+    <!-- childs Base de datos -->
+    <string name="atributo_BD_profesor_DISPONIBLE">disponible</string>
+    <string name="atributo_BD_profesor_NOMBRE">nombre</string>
+    <string name="atributo_BD_profesor_INFORMACION">informacion</string>
+
 
 </resources>
