@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/negro"
-    android:id="@+id/actividad_principal"
+    android:id="@+id/layout_activity_main"
     tools:context="com.mus.tec.MainActivity">
 
     <TextView

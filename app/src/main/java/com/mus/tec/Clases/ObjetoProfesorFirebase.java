@@ -4,15 +4,15 @@ package com.mus.tec.Clases;
  * Created by andres on 27/09/17.
  */
 
-public class ObjetoProfesor {
+public class ObjetoProfesorFirebase {
 
     String nombre, informacion;
     boolean disponible;
 
-    public ObjetoProfesor() {
+    public ObjetoProfesorFirebase() {
     }
 
-    public ObjetoProfesor(String nombre, String informacion, boolean disponible) {
+    public ObjetoProfesorFirebase(String nombre, String informacion, boolean disponible) {
         this.nombre = nombre;
         this.informacion = informacion;
         this.disponible = disponible;

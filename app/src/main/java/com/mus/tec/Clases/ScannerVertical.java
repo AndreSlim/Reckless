@@ -1,4 +1,4 @@
-package com.mus.tec;
+package com.mus.tec.Clases;
 
 /**
  * Created by andres on 13/09/17.

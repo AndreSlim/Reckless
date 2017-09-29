@@ -1,4 +1,4 @@
-package com.mus.tec;
+package com.mus.tec.Clases;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,6 +13,8 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.mus.tec.R;
+import com.mus.tec.VerNotificacion;
 
 /**
  * Created by andres on 22/09/17.

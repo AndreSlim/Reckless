@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="12dp"
-                app:cardElevation="@dimen/elevacion_carta"
+                app:cardElevation="@dimen/elevacion_cardView"
                 app:cardCornerRadius="6dp"
                 app:cardUseCompatPadding="false">
 
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="12dp"
-                app:cardElevation="@dimen/elevacion_carta"
+                app:cardElevation="@dimen/elevacion_cardView"
                 app:cardCornerRadius="6dp"
                 app:cardUseCompatPadding="false">
 

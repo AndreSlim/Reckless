@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.mus.tec.Clases.ObjetoProfesor;
+import com.mus.tec.Clases.ObjetoProfesorFirebase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class MainActivityProfesor extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String usuarioProfesor = user.getEmail().replace(".","_");
     // Variable evitar clicks rapidos
-    long mLastClickTime = 0;
+    long ultimoClick = 0;
 
     // Beta
     Button enviarNoti;
@@ -46,6 +46,7 @@ public class MainActivityProfesor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_profesor);
+
 
         // Casteo
         emailProfesor = (TextView) findViewById(R.id.email_profesor);
@@ -65,7 +66,7 @@ public class MainActivityProfesor extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 // Variable profe tiene los valores de la BD
-                final ObjetoProfesor profe = dataSnapshot.getValue(ObjetoProfesor.class);
+                final ObjetoProfesorFirebase profe = dataSnapshot.getValue(ObjetoProfesorFirebase.class);
 
 
                 // Comprueba con la base de datos el estado del profesor
@@ -127,9 +128,9 @@ public class MainActivityProfesor extends AppCompatActivity {
                     // - - - - - - - - - - - - < Efecto Revelar Disponible Starts > - - - - - - - - - - - - -
                     if (Build.VERSION.SDK_INT >= 21) {  //Condición para el material design
                         // - - - - - - - prevencion doble clic x x x
-                        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                        if (SystemClock.elapsedRealtime() - ultimoClick < 1000){
                             return;}
-                        mLastClickTime = SystemClock.elapsedRealtime();
+                        ultimoClick = SystemClock.elapsedRealtime();
                         // - - - - - - - prevencion doble clic x x x
                         int cx = (textoProfesorDisponible.getLeft() + textoProfesorDisponible.getRight()) / 2;
                         int cy = (textoProfesorDisponible.getTop() + textoProfesorDisponible.getBottom()) / 2;
@@ -154,9 +155,9 @@ public class MainActivityProfesor extends AppCompatActivity {
                     // - - - - - - - - - - - - < Efecto Revelar Starts > - - - - - - - - - - - - -
                     if (Build.VERSION.SDK_INT >= 21) {
                         // - - - - - - - prevencion doble clic x x x
-                        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                        if (SystemClock.elapsedRealtime() - ultimoClick < 1000){
                             return;}
-                        mLastClickTime = SystemClock.elapsedRealtime();
+                        ultimoClick = SystemClock.elapsedRealtime();
                         // - - - - - - - prevencion doble clic x x x
                         // obteniendo el centro de el circulo
                         int cx = (textoProfesorDisponible.getLeft() + textoProfesorDisponible.getRight()) / 2;

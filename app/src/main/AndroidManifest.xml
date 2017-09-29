@@ -12,7 +12,7 @@
 
         <!-- Activity para el splash -->
         <activity
-            android:name=".SplashActivity"
+            android:name=".Clases.SplashActivity"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,22 +24,22 @@
         <!-- Actividad principal -->
         <activity
             android:name=".MainActivity"
-            android:theme="@style/SinBarraDeAccion" />
+            android:theme="@style/SinBarraDeAccion.Dark" />
 
         <!-- Actividad mantener scanner vertical -->
         <activity
-            android:name=".ScannerVertical"
+            android:name=".Clases.ScannerVertical"
             android:screenOrientation="portrait" />
 
-        <!-- Actividad para preguntar QR -->
+        <!-- Actividad login Alumno QR -->
         <activity
-            android:name=".AlumnoQR"
-            android:theme="@style/SinBarraDeAccion" />
+            android:name=".AlumnoLogInQR"
+            android:theme="@style/SinBarraDeAccionDark.Transparent.Dark" />
 
-        <!-- Actividad Inicio de Sesión profesor -->
+        <!-- Actividad login profesor -->
         <activity
             android:name=".ProfesorLogIn"
-            android:theme="@style/SinBarraDeAccion" />
+            android:theme="@style/SinBarraDeAccionDark.Transparent.Dark"/>
 
         <!-- Actividad Principal Profesor -->
         <activity
@@ -47,7 +47,7 @@
             android:theme="@style/SinBarraDeAccion" />
 
         <!-- Servicio de mensajes Firebase -->
-        <service android:name=".ServicioDeMensajesFirebase">
+        <service android:name=".Clases.ServicioDeMensajesFirebase">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

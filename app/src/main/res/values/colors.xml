@@ -69,8 +69,8 @@
     <dimen name="elevacion_barra_de_aplicacion">4dp</dimen>
     <dimen name="elevacion_boton">2dp</dimen>
     <dimen name="elevacion_FAB">6dp</dimen>
-    <dimen name="elevacion_carta">2dp</dimen>
-    <dimen name="elevacion_carta_elevada">8dp</dimen>
+    <dimen name="elevacion_cardView">2dp</dimen>
+    <dimen name="elevacion_cardView_elevada">8dp</dimen>
     <dimen name="elevacion_menu">8dp</dimen>
     <dimen name="elevacion_ventana_dialogo">24dp</dimen>
     <dimen name="elevacion_navDrawer">16dp</dimen>

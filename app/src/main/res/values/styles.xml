@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/verde_ACCENT</item>
     </style>
 
     <!-- Estilo para el Spash activity-->
@@ -13,11 +13,20 @@
         <item name="android:windowBackground">@drawable/fondo_splash</item>
     </style>
 
-    <!-- Estilo sin barra de acción y transición translucido -->
+    <!-- Estilo sin barra de acción modo Light -->
     <style name="SinBarraDeAccion" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
 
-    <!-- Estilo para el error de un textview -->
+    <!-- Estilo sin barra de acción modo Dark -->
+    <style name="SinBarraDeAccion.Dark" parent="Theme.AppCompat.NoActionBar">
+    </style>
+
+    <!-- Estilo para la siguiente actividad de la revelación circular -->
+    <!-- Versión para API < 21 -->
+    <style name="SinBarraDeAccionDark.Transparent.Dark" parent="Theme.AppCompat.NoActionBar">
+    </style>
+
+    <!-- Estilo para error de un textview -->
     <style name="aparencia_error" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/error_color</item>
     </style>
