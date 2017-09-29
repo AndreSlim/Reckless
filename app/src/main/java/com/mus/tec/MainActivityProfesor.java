@@ -2,6 +2,7 @@ package com.mus.tec;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Intent;
 import android.os.Build;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +27,7 @@ import java.util.Map;
 
 public class MainActivityProfesor extends AppCompatActivity {
 
-    CardView cardEnLinea;
+    CardView cardEnLinea, cardEnviarNoti;
     TextView textoProfesorDisponible, textoProfesorNoDisponible;
 
     // Base de datos
@@ -38,7 +39,7 @@ public class MainActivityProfesor extends AppCompatActivity {
     long ultimoClick = 0;
 
     // Beta
-    Button enviarNoti;
+    Button enviarNoti; //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     Button cerrarSesion;
     TextView emailProfesor;
 
@@ -51,151 +52,65 @@ public class MainActivityProfesor extends AppCompatActivity {
         // Casteo
         emailProfesor = (TextView) findViewById(R.id.email_profesor);
         cerrarSesion = (Button) findViewById(R.id.boton_cerrar_sesion);
-        cardEnLinea = (CardView) findViewById(R.id.cardview_profesor_online);
-        textoProfesorNoDisponible = (TextView) findViewById(R.id.texto_profesor_NoDisponible);
         textoProfesorDisponible = (TextView) findViewById(R.id.texto_profesor_disponible);
+        textoProfesorNoDisponible = (TextView) findViewById(R.id.texto_profesor_NoDisponible);
+
+        cardEnLinea = (CardView) findViewById(R.id.cardview_profesor_online);
+        cardEnviarNoti = (CardView) findViewById(R.id.cardview_profesor_enviar_mensaje);
+
 
         // Inicio de la base de datos
         referenciaBD = FirebaseDatabase.getInstance().getReference()
                 .child("Profesores").child(usuarioProfesor);
 
 
+
+
         // Leyendo la base de datos
         referenciaBD.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 // Variable profe tiene los valores de la BD
                 final ObjetoProfesorFirebase profe = dataSnapshot.getValue(ObjetoProfesorFirebase.class);
 
-
                 // Comprueba con la base de datos el estado del profesor
                 if(profe.isDisponible()) {
-                    // - - - - - - - - - - - - < Efecto Revelar Disponible Starts > - - - - - - - - - - - - -
-                    if (Build.VERSION.SDK_INT >= 21) {  //Condición para el material design
-                        int cx = (textoProfesorDisponible.getLeft() + textoProfesorDisponible.getRight()) / 2;
-                        int cy = (textoProfesorDisponible.getTop() + textoProfesorDisponible.getBottom()) / 2;
-                        // Consiguiendo el Final del radio
-                        int finalRadius = Math.max(textoProfesorDisponible.getWidth(),
-                                textoProfesorDisponible.getHeight());
-                        // Creando la animacion para esta vista, el radio de inico es cero
-                        Animator anim =
-                                ViewAnimationUtils.createCircularReveal
-                                        (textoProfesorDisponible, cx, cy, 0, finalRadius);
-                        // Acciones con animación
-                        textoProfesorDisponible.setVisibility(View.VISIBLE);
-                        anim.setDuration(1200);  // Velocidad de la animación al revelar
-                        anim.start();
-                    } else {
-                        // Acción sin animación
-                        textoProfesorDisponible.setVisibility(View.VISIBLE);
-                    }
-                }else{// - - - - - - - - - - - - < Efecto Revelar Starts > - - - - - - - - - - - - -
-                    if (Build.VERSION.SDK_INT >= 21) {
-                        // obteniendo el centro de el circulo
-                        int cx = (textoProfesorDisponible.getLeft() + textoProfesorDisponible.getRight()) / 2;
-                        int cy = (textoProfesorDisponible.getTop() + textoProfesorDisponible.getBottom()) / 2;
-                        // obteniendo el radio inicial de el circulo
-                        int initialRadius = textoProfesorDisponible.getWidth();
-                        // creando la animación (el final del radio es cero)
-                        Animator anim =
-                                ViewAnimationUtils.createCircularReveal
-                                        (textoProfesorDisponible, cx, cy, initialRadius, 0);
-                        // haciendo la vista invisible cuando la animación esta acabada
-                        anim.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-                                // Acciones con animación
-                                textoProfesorDisponible.setVisibility(View.INVISIBLE);
-                            }
-                        });
-                        anim.setDuration(1200);
-                        anim.start();
-                    } else {
-                        // Acciones sin animación
-                        textoProfesorDisponible.setVisibility(View.INVISIBLE);
-                    } // - - - - - - - - - - - - < Efecto Revelar Ends > - - - - - - - - - - - - -
-
-                }
-
-        // Pulsación del CardView para poner en linea
-        cardEnLinea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(!profe.isDisponible()) {
-                    // - - - - - - - - - - - - < Efecto Revelar Disponible Starts > - - - - - - - - - - - - -
-                    if (Build.VERSION.SDK_INT >= 21) {  //Condición para el material design
-                        // - - - - - - - prevencion doble clic x x x
-                        if (SystemClock.elapsedRealtime() - ultimoClick < 1000){
-                            return;}
-                        ultimoClick = SystemClock.elapsedRealtime();
-                        // - - - - - - - prevencion doble clic x x x
-                        int cx = (textoProfesorDisponible.getLeft() + textoProfesorDisponible.getRight()) / 2;
-                        int cy = (textoProfesorDisponible.getTop() + textoProfesorDisponible.getBottom()) / 2;
-                        // Consiguiendo el Final del radio
-                        int finalRadius = Math.max(textoProfesorDisponible.getWidth(),
-                                textoProfesorDisponible.getHeight());
-                        // Creando la animacion para esta vista, el radio de inico es cero
-                        Animator anim =
-                                ViewAnimationUtils.createCircularReveal
-                                        (textoProfesorDisponible, cx, cy, 0, finalRadius);
-                        // Acciones con animación
-                        textoProfesorDisponible.setVisibility(View.VISIBLE);
-                        anim.setDuration(1200);  // Velocidad de la animación al revelar
-                        anim.start();
-                        referenciaBD.child(getString(R.string.atributo_BD_profesor_DISPONIBLE)).setValue(true);
-                    } else {
-                        // Acción sin animación
-                        textoProfesorDisponible.setVisibility(View.VISIBLE);
-                        referenciaBD.child(getString(R.string.atributo_BD_profesor_DISPONIBLE)).setValue(true);
-                    }
+                    AnimacionCircularFondoOpen();
                 }else{
-                    // - - - - - - - - - - - - < Efecto Revelar Starts > - - - - - - - - - - - - -
-                    if (Build.VERSION.SDK_INT >= 21) {
+                    AnimacionCircularFondoClose();
+                }
+
+                // Pulsación del CardView para poner en linea
+                cardEnLinea.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
                         // - - - - - - - prevencion doble clic x x x
                         if (SystemClock.elapsedRealtime() - ultimoClick < 1000){
                             return;}
                         ultimoClick = SystemClock.elapsedRealtime();
                         // - - - - - - - prevencion doble clic x x x
-                        // obteniendo el centro de el circulo
-                        int cx = (textoProfesorDisponible.getLeft() + textoProfesorDisponible.getRight()) / 2;
-                        int cy = (textoProfesorDisponible.getTop() + textoProfesorDisponible.getBottom()) / 2;
-                        // obteniendo el radio inicial de el circulo
-                        int initialRadius = textoProfesorDisponible.getWidth();
-                        // creando la animación (el final del radio es cero)
-                        Animator anim =
-                                ViewAnimationUtils.createCircularReveal
-                                        (textoProfesorDisponible, cx, cy, initialRadius, 0);
-                        // haciendo la vista invisible cuando la animación esta acabada
-                        anim.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-                                // Acciones con animación
-                                textoProfesorDisponible.setVisibility(View.INVISIBLE);
-                            }
-                        });
-                        anim.setDuration(1200);
-                        anim.start();
-                        referenciaBD.child(getString(R.string.atributo_BD_profesor_DISPONIBLE)).setValue(false);
-                    } else {
-                        // Acciones sin animación
-                        textoProfesorDisponible.setVisibility(View.INVISIBLE);
-                        referenciaBD.child(getString(R.string.atributo_BD_profesor_DISPONIBLE)).setValue(false);
+                        if(!profe.isDisponible()) {
+                            AnimacionCircularFondoOpen();
+                            referenciaBD.child(getString(R.string.atributo_BD_profesor_DISPONIBLE)).setValue(true);
+                        }else{
+                            AnimacionCircularFondoClose();
+                            referenciaBD.child(getString(R.string.atributo_BD_profesor_DISPONIBLE)).setValue(false);
+                        }
                     }
-                    // - - - - - - - - - - - - < Efecto Revelar Ends > - - - - - - - - - - - - -
-
-                }
-            }
-        });
-
+                });
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {} // Errores de BD
-        });
+        }); // Fin base de datos
 
+
+        // Pulsación del CardView Enviar Notificación
+        cardEnviarNoti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), EnviarNotificaciones.class));
+            }
+        });
 
 
 
@@ -210,7 +125,6 @@ public class MainActivityProfesor extends AppCompatActivity {
             emailProfesor.setText(user.getEmail());
         }
 
-
         // Boton de cerrar Sesión
         cerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,6 +134,9 @@ public class MainActivityProfesor extends AppCompatActivity {
                 onBackPressed();    // Pulsando boton atras
             }
         });
+
+        // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX ( BETA ) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        enviarNoti = (Button) findViewById(R.id.boton_enviar_notificacion);
 
         // BETA XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         enviarNoti.setOnClickListener(new View.OnClickListener() {
@@ -236,6 +153,56 @@ public class MainActivityProfesor extends AppCompatActivity {
         // BETA XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
     }
+
+
+
+    // - - - - - - - - - - - - < Animación del fondo Starts > - - - - - - - - - - - - - - - -
+    private void AnimacionCircularFondoOpen() {
+        if (Build.VERSION.SDK_INT >= 21) {  //Condición para el material design
+            int cx = (textoProfesorDisponible.getLeft() + textoProfesorDisponible.getRight()) / 2;
+            int cy = (textoProfesorDisponible.getTop() + textoProfesorDisponible.getBottom()) / 2;
+            // Consiguiendo el Final del radio
+            int finalRadius = Math.max(textoProfesorDisponible.getWidth(), textoProfesorDisponible.getHeight());
+            // Creando la animacion para esta vista, el radio de inico es cero
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal
+                            (textoProfesorDisponible, cx, cy, 0, finalRadius);
+            // Haciendo la vista visible e iniciando la animación
+            textoProfesorDisponible.setVisibility(View.VISIBLE);
+            anim.setDuration(800);  // Velocidad de la animación al revelar
+            anim.start();
+        }else{
+            textoProfesorDisponible.setVisibility(View.VISIBLE);  // Acción sin animación
+        }
+    }
+    private void AnimacionCircularFondoClose() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            // obteniendo el centro de el circulo
+            int cx = (textoProfesorDisponible.getLeft() + textoProfesorDisponible.getRight()) / 2;
+            int cy = (textoProfesorDisponible.getTop() + textoProfesorDisponible.getBottom()) / 2;
+            // obteniendo el radio inicial de el circulo
+            int initialRadius = textoProfesorDisponible.getWidth();
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal
+                            (textoProfesorDisponible, cx, cy, initialRadius, 0);
+            anim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    textoProfesorDisponible.setVisibility(View.INVISIBLE);
+                }
+            });
+            // inicia la animación
+            anim.setDuration(500);
+            anim.start();
+        } else {
+            textoProfesorDisponible.setVisibility(View.INVISIBLE);  // Acción sin animación
+        }
+    }// - - - - - - - - - - - - < Animación del fondo Ends > - - - - - - - - - - - - - - - - - -
+
+
+
+
     // BETA XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public static void enviarNotificacion(String topic_name, final String message, String TAG) {
         DatabaseReference ref = FirebaseDatabase.getInstance()
@@ -248,4 +215,17 @@ public class MainActivityProfesor extends AppCompatActivity {
         notifications.push().setValue(notification);
     }
     // BETA XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+
+
+    // Salir de la aplicación
+
+
+    // Termina el proceso para evitar errores de dibujado
+    @Override
+    public void onBackPressed() {
+        android.os.Process.killProcess(android.os.Process.myPid());
+
+    }
 }

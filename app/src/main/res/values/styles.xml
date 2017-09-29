@@ -26,10 +26,16 @@
     <style name="SinBarraDeAccionDark.Transparent.Dark" parent="Theme.AppCompat.NoActionBar">
     </style>
 
-    <!-- Estilo para error de un textview -->
-    <style name="aparencia_error" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/error_color</item>
+    <!-- Estilo error de editText blanco -->
+    <style name="error_editText_blanco" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/error_color_blanco</item>
     </style>
-    <color name="error_color">#FFFFFF</color>
+    <color name="error_color_blanco">#FFFFFF</color>
+
+    <!-- Estilo error de editText rojo -->
+    <style name="error_editText_rojo" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/error_color_rojo</item>
+    </style>
+    <color name="error_color_rojo">#f44336</color>
 
 </resources>

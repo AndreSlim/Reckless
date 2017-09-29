@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Casteo
         fondoMenuCircular = (TextView) findViewById(R.id.fondo_menuCir);
+        // View Para animación entre actividades
         final View viewActividadPrincipal = findViewById(R.id.layout_activity_main);
 
         // Menú Circular
@@ -214,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
                         // Muestra fondo animado en API <21
                         AnimacionCircularFondoClose();
                     }
-                }, 200);
+                }, 500);
 
                 // Snackbar
                 snackbar.dismiss();
@@ -283,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
         // Anulando otras transacciones
         overridePendingTransition(0, 0);
     }// - - - - - - - - - - - - < Siguiente Actividad con Animación Starts > - - - - - - - - - - - -
+
 
 
 

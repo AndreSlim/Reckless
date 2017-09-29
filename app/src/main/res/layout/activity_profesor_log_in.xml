@@ -24,7 +24,7 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <ImageView android:src="@drawable/ic_icon_app"
+        <ImageView android:src="@drawable/ic_profesor"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_marginBottom="15dp"
@@ -34,7 +34,7 @@
             android:id="@+id/profesor_correo_mat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/aparencia_error"
+            app:errorTextAppearance="@style/error_editText_blanco"
             >
                 <EditText
                     android:id="@+id/profesor_correo"
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:errorTextAppearance="@style/aparencia_error"
+            app:errorTextAppearance="@style/error_editText_blanco"
             app:passwordToggleEnabled="true">
                 <EditText
                     android:id="@+id/profesor_pass"
