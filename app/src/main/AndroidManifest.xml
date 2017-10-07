@@ -42,8 +42,24 @@
             android:theme="@style/SinBarraDeAccion" />
 
         <!-- Actividad Principal Profesor -->
-        <activity android:name=".MainActivityProfesor"
-            android:theme="@style/SinBarraDeAccion"></activity>
+        <activity
+            android:name=".MainActivityProfesor"
+            android:theme="@style/SinBarraDeAccion" />
+
+        <!-- Actividad del mapa añadiendo la huella digital para habilitar la API -->
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA6oenmXxnBIzGKgavwA00dV0mmfKHibGU" />
+
+        <activity
+            android:name=".MapaTec"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ContenedorInfoLugar"/>
     </application>
 
 </manifest>

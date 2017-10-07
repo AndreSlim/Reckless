@@ -27,7 +27,6 @@ import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 public class MainActivity extends AppCompatActivity {
 
     TextView fondo;     // Fondo de color para menú circular
-
     // Listener para Firebase
     FirebaseAuth.AuthStateListener escuchaInicioSesionProfesor;
 
@@ -78,11 +77,23 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onMenuSelected(int index) {
-
                         // - - - - - - - - - - - - < Alunmo seleccionado Starts > - - - - - - - - - - - - -
 
                         switch (index){
 
+                            case 0: //MAPA
+                                Handler handlerM = new Handler();    // Retardo para abrir el Intent
+                                handlerM.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        View view = findViewById(R.id.actividad_principal);
+                                        actividadPresenteToActividadSiguiente(view,0);
+
+                                    }
+                                }, 620);    // Tiempo en milisegundos para iniciar la actividad
+
+                                break;
                             case 1:     // Profesor seleccionado
 
                                 Handler handlerP = new Handler();    // Retardo para abrir el Intent
@@ -91,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                                     public void run() {
 
                                         View view = findViewById(R.id.actividad_principal);
-                                        actividadPresenteToProfesor(view);
+                                        actividadPresenteToActividadSiguiente(view,1);
 
                                     }
                                 }, 620);    // Tiempo en milisegundos para iniciar la actividad
@@ -106,10 +117,11 @@ public class MainActivity extends AppCompatActivity {
                                                         public void run() {
 
                                         View view = findViewById(R.id.actividad_principal);
-                                        actividadPresenteToAlumno(view);
+                                        actividadPresenteToActividadSiguiente(view,2);
 
                                                         }
                                 }, 620);    // Tiempo en milisegundos para iniciar la actividad
+
                         }
 
                         // - - - - - - - - - - - - < Alunmo seleccionado Ends > - - - - - - - - - - - - -
@@ -187,42 +199,41 @@ public class MainActivity extends AppCompatActivity {
 
         // - - - - - - - - - - - - < MENÚ CIRCULAR ENDS > - - - - - - - - - - - - -
     }
-
     // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
 
-    public void actividadPresenteToAlumno(View view) {
+    public void actividadPresenteToActividadSiguiente(View view, int tipo) { //Recibiendo variable de tipo int para saber que Zactividad lanzar
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(this, view, "transition");
         int revealX = (int) (view.getX() + view.getWidth() / 2);
         int revealY = (int) (view.getY() + view.getHeight() / 2);
-
-        Intent intent = new Intent(this, AlumnoQR.class);
-
-        intent.putExtra(AlumnoQR.EXTRA_CIRCULAR_REVEAL_X, revealX); // Valores tomados de la actividad a llegar
-        intent.putExtra(AlumnoQR.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+        Intent intent=null;
+        String x="",y="";
+        if(tipo==0)
+        {
+            intent = new Intent(this, MapaTec.class);
+            x=MapaTec.EXTRA_CIRCULAR_REVEAL_X;
+            y=MapaTec.EXTRA_CIRCULAR_REVEAL_Y;
+        }
+        if(tipo==1)
+        {
+            intent = new Intent(this, ProfesorLogIn.class);
+            x=ProfesorLogIn.EXTRA_CIRCULAR_REVEAL_X;
+            y=ProfesorLogIn.EXTRA_CIRCULAR_REVEAL_Y;
+        }
+        if(tipo==2)
+        {
+            intent = new Intent(this, AlumnoQR.class);
+            x=AlumnoQR.EXTRA_CIRCULAR_REVEAL_X;
+            y=AlumnoQR.EXTRA_CIRCULAR_REVEAL_Y;
+        }
+        intent.putExtra(x, revealX); // Valores tomados de la actividad a llegar
+        intent.putExtra(y, revealY);
 
         ActivityCompat.startActivity(this, intent, options.toBundle());
 
     }
     // - - - - - - - - - - - - < Animación entre actividades ENDS > - - - - - - - - - - - - -
 
-    // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
-
-    public void actividadPresenteToProfesor(View view) {
-        ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(this, view, "transition");
-        int revealX = (int) (view.getX() + view.getWidth() / 2);
-        int revealY = (int) (view.getY() + view.getHeight() / 2);
-
-        Intent intent = new Intent(this, ProfesorLogIn.class);
-
-        intent.putExtra(AlumnoQR.EXTRA_CIRCULAR_REVEAL_X, revealX); // Valores tomados de la actividad a llegar
-        intent.putExtra(AlumnoQR.EXTRA_CIRCULAR_REVEAL_Y, revealY);
-
-        ActivityCompat.startActivity(this, intent, options.toBundle());
-
-    }
-    // - - - - - - - - - - - - < Animación entre actividades ENDS > - - - - - - - - - - - - -
 
     // - - - - - - - - - - - - < Escucha inicio de sesión Firebase STARTS > - - - - - - - - - - - - -
 
