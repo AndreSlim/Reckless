@@ -1,0 +1,26 @@
+<resources>
+    <!-- Medidas -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="dialog_body">24dp</dimen>
+    <dimen name="padding_between">20dp</dimen>
+    <dimen name="edit_text_padding">16dp</dimen>
+    <dimen name="normal_padding">8dp</dimen>
+    <dimen name="button_padding">24dp</dimen>
+
+
+    <!-- Elevaciones -->
+    <dimen name="elevacion_barra_de_aplicacion">4dp</dimen>
+    <dimen name="elevacion_boton">2dp</dimen>
+    <dimen name="elevacion_FAB">6dp</dimen>
+    <dimen name="elevacion_cardView">2dp</dimen>
+    <dimen name="elevacion_cardView_elevada">8dp</dimen>
+    <dimen name="elevacion_menu">8dp</dimen>
+    <dimen name="elevacion_ventana_dialogo">24dp</dimen>
+    <dimen name="elevacion_navDrawer">16dp</dimen>
+    <dimen name="elevacion_indicador_recargar">3dp</dimen>
+    <dimen name="elevacion_barra_busqueda">3dp</dimen>
+    <dimen name="elevacion_snackBar">6dp</dimen>
+    <dimen name="elevacion_switch">1dp</dimen>
+
+</resources>

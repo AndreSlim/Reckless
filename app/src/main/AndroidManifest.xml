@@ -39,7 +39,7 @@
         <!-- Actividad login profesor -->
         <activity
             android:name=".ProfesorLogIn"
-            android:theme="@style/SinBarraDeAccionDark.Transparent.Dark"/>
+            android:theme="@style/SinBarraDeAccionDark.Transparent.Dark" />
 
         <!-- Actividad Principal Profesor -->
         <activity
@@ -64,9 +64,23 @@
             android:theme="@style/SinBarraDeAccion" />
 
         <!-- Actividad Acerca de profesor -->
-        <activity android:name=".AcercaDeProfesor"></activity>
+        <activity android:name=".AcercaDeProfesor" />
 
+        <!-- Actividad del layout_activity_mapa_tec añadiendo la huella digital para habilitar la API -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA6oenmXxnBIzGKgavwA00dV0mmfKHibGU" />
+        <!-- Actividad MapaTec -->
+        <activity
+            android:name=".MapaTec"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
+        <!-- Actividad InfoLugar -->
+        <activity android:name=".ContenedorInfoLugar"/>
     </application>
 
 </manifest>

@@ -154,6 +154,22 @@ public class MainActivity extends AppCompatActivity {
 
                         switch (index){
 
+
+                            case 0:
+                                // Profesor Seccionado
+                                Handler retardoVisitante = new Handler();    // Retardo para abrir el Intent
+                                retardoVisitante.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        // Inicia sin animación hasta la espera de un Main Visitante
+                                        startActivity(new Intent(getApplicationContext(), MapaTec.class));
+
+                                    }
+                                }, 400);    // Tiempo en milisegundos para iniciar la actividad
+
+                                break;
+
                             case 1:
                                 // Profesor Seccionado
                                 Handler retardoProfesor = new Handler();    // Retardo para abrir el Intent

@@ -157,7 +157,7 @@ public class ProfesorLogIn extends AppCompatActivity{
 
 
 
-    // - - - - - - - - - - - - < Siguiente Actividad con Animación Starts > - - - - - - - - - - - -
+    /*/ - - - - - - - - - - - - < Siguiente Actividad con Animación Starts > - - - - - - - - - - - -
     public void SigActividadConAnimCir(View v, Intent intent) {
         // calculando el centro del view
         int revealX = (int) (v.getX() + v.getWidth() / 2);
@@ -169,6 +169,6 @@ public class ProfesorLogIn extends AppCompatActivity{
         ActivityCompat.startActivity(this, intent, null);
         // Anulando otras transacciones
         overridePendingTransition(0, 0);
-    }// - - - - - - - - - - - - < Siguiente Actividad con Animación Starts > - - - - - - - - - - - -
+    }/*/// - - - - - - - - - - - - < Siguiente Actividad con Animación Starts > - - - - - - - - - - - -
 
 }
