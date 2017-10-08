@@ -16,6 +16,7 @@ public class ContenedorInfoLugar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contenedor_info_lugar);
+        //Recibiendo parametros de MapaTec
         if(savedInstanceState==null)
         {
 
@@ -38,15 +39,19 @@ public class ContenedorInfoLugar extends AppCompatActivity {
         }
         crearInfoFullDialogo();
     }
+    //----------------Mandando parametros a InfoLugar-------------------------------
     private void crearInfoFullDialogo()
     {
         FragmentManager fragmentmanager=getSupportFragmentManager();
-        InfoLugar newFragment=new InfoLugar();
-        newFragment.newInstance(contenido,titulo);
+        InfoLugar info=new InfoLugar();
+        info.newInstance(contenido,titulo);
         FragmentTransaction transaction =fragmentmanager.beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.add(android.R.id.content,newFragment,"InfoLugarFragment").commit();
+        transaction.add(android.R.id.content,info,"InfoLugarFragment").commit();
     }
+    //------------------------------------------------------------------------------
+
+    //----------Habilita la acción de retroceder a la actividad anterior al presionar el botón de retroceso---------
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -66,4 +71,5 @@ public class ContenedorInfoLugar extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    //--------------------------------------------------------------------------------------------------------------
 }

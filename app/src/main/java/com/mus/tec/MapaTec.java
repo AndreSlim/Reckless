@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
@@ -37,6 +38,7 @@ public class MapaTec extends FragmentActivity implements OnMapReadyCallback,Goog
     View vistaPrincipal;    // Vista principal para la animación
     private int revealX;
     private int revealY;
+    Polygon lista[];
 
     // - - - - - - - - - - - - < Animación entre actividades ENDS > - - - - - - - - - - - - -
 
@@ -49,10 +51,6 @@ public class MapaTec extends FragmentActivity implements OnMapReadyCallback,Goog
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapa);
         mapFragment.getMapAsync(this);
-        /*mMapView = (MapView) findViewById(R.id.map);
-        mMapView.onCreate(savedInstanceState);
-        mMapView.onResume();
-        mMapView.getMapAsync(this);*/
 
         // - - - - - - - - - - - - < Animación entre actividades STARTS > - - - - - - - - - - - - -
 
@@ -85,7 +83,7 @@ public class MapaTec extends FragmentActivity implements OnMapReadyCallback,Goog
 
 
     }
-    //Metodo para declarar el contenido del mapa
+    //------------------------------------Metodo para interactuar con el mapa-------------------------------------------------------------
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -97,35 +95,39 @@ public class MapaTec extends FragmentActivity implements OnMapReadyCallback,Goog
         uiSettings.setTiltGesturesEnabled(false); //Modifica gestos de la inclinación
         uiSettings.setRotateGesturesEnabled(false); //Modifica la disponibilidad de rotación
         //uiSettings.setAllGesturesEnabled(false); //Modifica la disponibilidad de todos los gestos al mismo tiempo
-
-
         LatLng tec = new LatLng(18.437212, -97.397943);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tec,17));
+        Crea_Poligonos();
 
-        Polygon canchafut = mMap.addPolygon(new PolygonOptions().add(new LatLng(18.437630, -97.396196), new LatLng(18.437176, -97.395790), new LatLng(18.437652, -97.395127), new LatLng(18.438141, -97.395556))
-                .strokeColor(Color.WHITE)
-                .fillColor(Color.parseColor("#A2405542"))
-                .strokeWidth(1).clickable(true));
-        canchafut.setTag("cancha fut");
-
-
-
-        Polygon tre7 = mMap.addPolygon(new PolygonOptions().add(new LatLng(18.437208, -97.396494), new LatLng(18.437016, -97.396554), new LatLng(18.436915, -97.396159), new LatLng(18.437111, -97.396092))
-                .strokeColor(Color.WHITE)
-                .fillColor(Color.parseColor("#a7936163"))
-                .strokeWidth(1).clickable(true));
-        tre7.setTag("37");
-
-
-        // color guinda #a7936163
-
-        Polygon veintitres = mMap.addPolygon(new PolygonOptions().add(new LatLng(18.436356, -97.398283), new LatLng(18.436129, -97.398361), new LatLng(18.436071, -97.398116), new LatLng(18.436290, -97.398032))
-                .strokeColor(Color.WHITE)
-                .fillColor(Color.parseColor("#a7936163"))
-                .strokeWidth(1).clickable(true));
-        veintitres.setTag("23");
     }
-    // Detección de evento al presonar un poligono
+    private void Crea_Poligonos()
+    {
+        String Poligonos[][]=new String[][]{
+                {"18.437630","-97.396196","18.437176","-97.395790","18.437652","-97.395127","18.438141","-97.395556","#FFFFFFFF","#a7936163","1","true","cancha fut"},
+                {"18.436356","-97.398283","18.436129","-97.398361","18.436071","-97.398116","18.436290","-97.398032","#FFFFFFFF","#a7936163","1","true","23"},
+                {"18.437208","-97.396494","18.437016","-97.396554","18.436915","-97.396159","18.437111","-97.396092","#FFFFFFFF","#a7936163","1","true","37"}
+        };
+        // color guinda #a7936163
+        lista=new Polygon[Poligonos.length];
+        for(int i=0;i<Poligonos.length;i++)
+        {
+            LatLng lat1=new LatLng(Double.parseDouble(Poligonos[i][0]),Double.parseDouble(Poligonos[i][1]));
+            LatLng lat2=new LatLng(Double.parseDouble(Poligonos[i][2]),Double.parseDouble(Poligonos[i][3]));
+            LatLng lat3=new LatLng(Double.parseDouble(Poligonos[i][4]),Double.parseDouble(Poligonos[i][5]));
+            LatLng lat4=new LatLng(Double.parseDouble(Poligonos[i][6]),Double.parseDouble(Poligonos[i][7]));
+            Polygon nuevo=mMap.addPolygon(new PolygonOptions().add(lat1,lat2,lat3,lat4)
+                    .strokeColor(Color.parseColor(Poligonos[i][8]))
+                    .fillColor(Color.parseColor(Poligonos[i][9]))
+                    .strokeWidth(Float.parseFloat(Poligonos[i][10]))
+            .clickable(Boolean.parseBoolean(Poligonos[i][11])));
+            nuevo.setTag(Poligonos[i][12]);
+            lista[i]=nuevo;
+            Log.i("CREA UN POLIGONO",Poligonos[i][12]);
+        }
+    }
+
+
+    //---------- Detección de evento al presonar el área de un poligono----------------
     @Override
     public void onPolygonClick(Polygon polygon) {
         String tipo="";
@@ -136,20 +138,19 @@ public class MapaTec extends FragmentActivity implements OnMapReadyCallback,Goog
         switch (tipo)
         {
             case "cancha fut":
-                //Toast.makeText(this, "Se presiono "+polygon.getTag().toString(), Toast.LENGTH_SHORT).show();
                 break;
             case "37":
-                //Toast.makeText(this, "Se presiono el edificio "+polygon.getTag().toString(), Toast.LENGTH_SHORT).show();
                 break;
             case "23":
-                //Toast.makeText(this, "Se presiono el edificio "+polygon.getTag().toString(), Toast.LENGTH_SHORT).show();
-                DialogLista().show();
+                DialogLista("Edificio de cómputo").show();
                 break;
         }
 
     }
-    //Lista que muestra el nombreo o los departamentos de cada edificio
-    public AlertDialog DialogLista()
+    //----------------------------------------------------------------------------------
+
+    //----Cuadro de dialogo que muestra el nombreo o departamentos de cada edificio-------------------
+    public AlertDialog DialogLista(String titulo_lista)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(MapaTec.this);
 
@@ -159,7 +160,7 @@ public class MapaTec extends FragmentActivity implements OnMapReadyCallback,Goog
         items[1] = "23-F";
         items[2] = "No se";
 
-        builder.setTitle("Edificio de Cómputo").setItems(items, new DialogInterface.OnClickListener()
+        builder.setTitle(titulo_lista).setItems(items, new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -183,18 +184,21 @@ public class MapaTec extends FragmentActivity implements OnMapReadyCallback,Goog
 
         return builder.create();
     }
+    //------------------------------------------------------------------------------------------------
+
+    //---------Se recibe como parametros el contenido para el dialogo de pantalla completa------------
     public void LlamaFragLugar(String contenido,String titulo)
     {
        String t,c;
         t=ContenedorInfoLugar.TITULO;
         c=ContenedorInfoLugar.CONTENIDO;
+        //Intent para enviar el contenido recibido
        Intent intent=new Intent(this,ContenedorInfoLugar.class);
         intent.putExtra(t,titulo);
         intent.putExtra(c,contenido);
         startActivity(intent);
     }
-
-
+    //------------------------------------------------------------------------------------------------
 
     // - - - - - - - - - - - - < Animación entre actividades STARTS METODOS> - - - - - - - - - - - - -
 
@@ -216,4 +220,6 @@ public class MapaTec extends FragmentActivity implements OnMapReadyCallback,Goog
     }
     // - - - - - - - - - - - - < Animación entre actividades ENDS METODOS> - - - - - - - - - - - - -
 
+
 }
+

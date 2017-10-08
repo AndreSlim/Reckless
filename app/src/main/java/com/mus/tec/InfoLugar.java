@@ -1,16 +1,12 @@
 package com.mus.tec;
 
-
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class InfoLugar extends DialogFragment {
@@ -19,9 +15,9 @@ public class InfoLugar extends DialogFragment {
     private static String titulo;
 
     public InfoLugar() {
-        // Required empty public constructor
+        // Se requiere constructor vacio
     }
-
+    //Instancia de esta clase
     public static InfoLugar newInstance(String contenido1, String titulo1) {
         contenido = contenido1;
         titulo = titulo1;
@@ -36,10 +32,11 @@ public class InfoLugar extends DialogFragment {
         //Obtiene instancia de la action bar
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
-            //hablita el up button
+            //Hablita el botón de retroceso
             actionBar.setDisplayHomeAsUpEnabled(true);
-            //cambia el icono del up button
+            //Cambia el icono del botón de retroceso
             actionBar.setHomeAsUpIndicator(R.mipmap.ic_close);
+            //Titulu para la Actionbar recibido de la Actovity ContenedorInfoLugar
             actionBar.setTitle(titulo);
         }
 
@@ -51,10 +48,6 @@ public class InfoLugar extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_info_lugar, container, false);
         TextView t = view.findViewById(R.id.textView2);
         t.setText(contenido);
-        //ImageView i = (ImageView) view.findViewById(R.id.image);
-       // i.setImageBitmap(bitma);
-        //getDialog().setTitle(titulo);
-
         return view;
     }
 
