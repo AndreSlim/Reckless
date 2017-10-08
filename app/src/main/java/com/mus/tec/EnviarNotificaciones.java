@@ -8,6 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class EnviarNotificaciones extends AppCompatActivity {
 
     Button enviarNoti;
@@ -36,7 +42,15 @@ public class EnviarNotificaciones extends AppCompatActivity {
                 String tituloNoti = titulo.getText().toString();
                 String mensajeNoti = mensaje.getText().toString();
                 if(!tituloNoti.isEmpty() && !mensajeNoti.isEmpty()) {   // Campos no vacíos
-                    Toast.makeText(EnviarNotificaciones.this, "Pulsado!", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(EnviarNotificaciones.this, "Pulsado...", Toast.LENGTH_SHORT).show();
+
+                    //--
+                    String canal_notificacion = "todos";
+                    String titulo = tituloNoti;
+                    String mensaje = mensajeNoti;
+                    enviarNotificacion(canal_notificacion, mensaje, titulo);
+                    //--
                 }
             }
         });
@@ -63,5 +77,22 @@ public class EnviarNotificaciones extends AppCompatActivity {
             mensajeMaterial.setErrorEnabled(false);
         }
     }// - - - - - - - - - - - - < VALIDAR CAMPOS ENDS > - - - - - - - - - - - - -
+
+
+    // BETA XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    public static void enviarNotificacion(String canal, final String mensaje, String titulo) {
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReferenceFromUrl("https://musapp-7d55e.firebaseio.com/");
+        final DatabaseReference notifications = ref.child("solicitudDeNotificaciones");
+        Map notification = new HashMap<>();
+
+        // crea - <valor en base de datos>, <dato enviado>
+        notification.put("canal_notificacion", canal);
+        notification.put("mensaje", mensaje);
+        notification.put("titulo", titulo);
+        notifications.push().setValue(notification);
+    }
+    // BETA XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 
 }

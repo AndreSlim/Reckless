@@ -39,7 +39,6 @@ public class MainActivityProfesor extends AppCompatActivity {
     long ultimoClick = 0;
 
     // Beta
-    Button enviarNoti; //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     Button cerrarSesion;
     TextView emailProfesor;
 
@@ -118,8 +117,6 @@ public class MainActivityProfesor extends AppCompatActivity {
 
 
         // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX ( BETA ) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        enviarNoti = (Button) findViewById(R.id.boton_enviar_notificacion);
-
         // Condición para comprobar que hay usuario con cuenta activa
         if(user != null){
             emailProfesor.setText(user.getEmail());
@@ -136,23 +133,12 @@ public class MainActivityProfesor extends AppCompatActivity {
         });
 
         // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX ( BETA ) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        enviarNoti = (Button) findViewById(R.id.boton_enviar_notificacion);
 
-        // BETA XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        enviarNoti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivityProfesor.this, "Enviando notificación", Toast.LENGTH_SHORT).show();
-                String topic = "todos";
-                String mensaje = "Mensaje chido";
-                String TAG = "TAG chido";
-                enviarNotificacion(topic, mensaje, TAG);
 
-            }
-        });
-        // BETA XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-    }
+
+
+    } // metodo principal
 
 
 
@@ -200,26 +186,6 @@ public class MainActivityProfesor extends AppCompatActivity {
         }
     }// - - - - - - - - - - - - < Animación del fondo Ends > - - - - - - - - - - - - - - - - - -
 
-
-
-
-    // BETA XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    public static void enviarNotificacion(String topic_name, final String message, String TAG) {
-        DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReferenceFromUrl("https://musapp-7d55e.firebaseio.com/");
-        final DatabaseReference notifications = ref.child("solicitudDeNotificaciones");
-        Map notification = new HashMap<>();
-        notification.put("topic_name", topic_name);
-        notification.put("message", message);
-        notification.put("click_action", TAG);
-        notifications.push().setValue(notification);
-    }
-    // BETA XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
-
-
-    // Salir de la aplicación
 
 
     // Termina el proceso para evitar errores de dibujado

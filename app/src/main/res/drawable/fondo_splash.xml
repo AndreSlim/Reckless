@@ -7,11 +7,11 @@
         android:drawable="@color/blanco"/>
 
     <item
-        android:drawable="@drawable/ic_splash"
+        android:drawable="@drawable/ic_icon_app"
         android:top="128dp"
         android:gravity="center_horizontal"
-        android:height="86dp"
-        android:width="86dp"/>
+        android:height="128dp"
+        android:width="128dp"/>
 
 
 </layer-list>
